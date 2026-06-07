@@ -1,15 +1,49 @@
 import { useState, useCallback, useEffect } from 'react';
 import { cloneDefaultContent } from '../data/defaultContent';
 import { api, setAdminToken } from '../lib/api';
+import {
+  newWork,
+  newAlbum,
+  newStreetCase,
+  newPricingItem,
+  newSocialLink,
+  newExhibition,
+  newMissionPillar,
+  newProcessStep,
+} from './templates';
 
 const TABS = [
   { id: 'text', label: '文案' },
-  { id: 'works', label: '作品集' },
+  { id: 'albums', label: '作品集分类' },
+  { id: 'works', label: '作品条目' },
   { id: 'street', label: '街头案例' },
   { id: 'pricing', label: '报价' },
   { id: 'social', label: '社媒' },
+  { id: 'contact', label: '扩列二维码' },
   { id: 'events', label: '展览' },
 ];
+
+const STREET_LAYOUTS = ['hero', 'tall', 'wide', 'square'];
+
+function PanelHead({ title, count, onAdd, addLabel = '+ 新增一项' }) {
+  return (
+    <div className="adm-panel-head">
+      <div>
+        <h2>{title}{count != null ? ` (${count})` : ''}</h2>
+        <p className="adm-panel-tip">新增后会自动出现在网站对应模块，记得点右上角「保存全部」</p>
+      </div>
+      {onAdd && (
+        <button type="button" className="adm-btn adm-btn--ghost" onClick={onAdd}>{addLabel}</button>
+      )}
+    </div>
+  );
+}
+
+function RemoveBtn({ onClick, label = '删除此项' }) {
+  return (
+    <button type="button" className="adm-btn adm-btn--danger" onClick={onClick}>{label}</button>
+  );
+}
 
 function Field({ label, children }) {
   return (
@@ -111,12 +145,174 @@ function TextPanel({ content, setContent }) {
       <h2>联系</h2>
       <Field label="名称"><BilingualInput value={{ zh: zh.contact.name, en: en.contact.name }} onChange={(v) => { patch('zh', 'contact', { name: v.zh }); patch('en', 'contact', { name: v.en }); }} /></Field>
       <Field label="说明"><BilingualInput multiline value={{ zh: zh.contact.desc, en: en.contact.desc }} onChange={(v) => { patch('zh', 'contact', { desc: v.zh }); patch('en', 'contact', { desc: v.en }); }} /></Field>
+
+      <h2>关于 · 三大支柱</h2>
+      {zh.mission.pillars.map((pillar, i) => (
+        <div key={i} className="adm-card adm-card--compact">
+          <Field label={`支柱 ${i + 1} · 标题`}>
+            <BilingualInput
+              value={{ zh: pillar.title, en: en.mission.pillars[i]?.title ?? '' }}
+              onChange={(v) => {
+                const zhPillars = [...zh.mission.pillars];
+                const enPillars = [...en.mission.pillars];
+                zhPillars[i] = { ...zhPillars[i], title: v.zh };
+                enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), title: v.en };
+                patch('zh', 'mission', { pillars: zhPillars });
+                patch('en', 'mission', { pillars: enPillars });
+              }}
+            />
+          </Field>
+          <Field label="描述">
+            <BilingualInput
+              multiline
+              value={{ zh: pillar.desc, en: en.mission.pillars[i]?.desc ?? '' }}
+              onChange={(v) => {
+                const zhPillars = [...zh.mission.pillars];
+                const enPillars = [...en.mission.pillars];
+                zhPillars[i] = { ...zhPillars[i], desc: v.zh };
+                enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), desc: v.en };
+                patch('zh', 'mission', { pillars: zhPillars });
+                patch('en', 'mission', { pillars: enPillars });
+              }}
+            />
+          </Field>
+          <RemoveBtn onClick={() => {
+            patch('zh', 'mission', { pillars: zh.mission.pillars.filter((_, idx) => idx !== i) });
+            patch('en', 'mission', { pillars: en.mission.pillars.filter((_, idx) => idx !== i) });
+          }} />
+        </div>
+      ))}
+      <button
+        type="button"
+        className="adm-btn adm-btn--ghost"
+        onClick={() => {
+          const item = newMissionPillar();
+          patch('zh', 'mission', { pillars: [...zh.mission.pillars, item.zh] });
+          patch('en', 'mission', { pillars: [...en.mission.pillars, item.en] });
+        }}
+      >
+        + 新增支柱
+      </button>
+
+      <h2>创作流程 · 步骤</h2>
+      {zh.process.steps.map((step, i) => (
+        <div key={i} className="adm-card adm-card--compact">
+          <Field label={`步骤 ${i + 1}`}>
+            <BilingualInput
+              multiline
+              value={{ zh: step, en: en.process.steps[i] ?? '' }}
+              onChange={(v) => {
+                const zhSteps = [...zh.process.steps];
+                const enSteps = [...en.process.steps];
+                zhSteps[i] = v.zh;
+                enSteps[i] = v.en;
+                patch('zh', 'process', { steps: zhSteps });
+                patch('en', 'process', { steps: enSteps });
+              }}
+            />
+          </Field>
+          <RemoveBtn onClick={() => {
+            patch('zh', 'process', { steps: zh.process.steps.filter((_, idx) => idx !== i) });
+            patch('en', 'process', { steps: en.process.steps.filter((_, idx) => idx !== i) });
+          }} />
+        </div>
+      ))}
+      <button
+        type="button"
+        className="adm-btn adm-btn--ghost"
+        onClick={() => {
+          const item = newProcessStep();
+          patch('zh', 'process', { steps: [...zh.process.steps, item.zh] });
+          patch('en', 'process', { steps: [...en.process.steps, item.en] });
+        }}
+      >
+        + 新增步骤
+      </button>
+    </div>
+  );
+}
+
+function AlbumsPanel({ content, setContent }) {
+  const items = content.albums ?? [];
+  const workCounts = Object.fromEntries(
+    items.map((a) => [a.id, content.worksManifest.filter((w) => w.album === a.id).length]),
+  );
+
+  const update = (index, patch) => {
+    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
+    setContent({ ...content, albums: next });
+  };
+
+  const add = () => {
+    setContent({ ...content, albums: [...items, newAlbum()] });
+  };
+
+  const remove = (index) => {
+    const album = items[index];
+    const count = workCounts[album.id] ?? 0;
+    const msg = count
+      ? `该分类下有 ${count} 件作品。删除后这些作品仍会保留，但可能无法在前台正确显示。确定删除？`
+      : '确定删除此作品集分类？';
+    if (!window.confirm(msg)) return;
+    setContent({ ...content, albums: items.filter((_, i) => i !== index) });
+  };
+
+  return (
+    <div className="adm-panel">
+      <PanelHead title="作品集分类" count={items.length} onAdd={add} addLabel="+ 新增系列" />
+      <p className="adm-panel-tip">
+        每个分类对应前台一个大的系列模块（如 FAG、电子大头）。新增后可在「作品条目」里往该分类添加图片。
+      </p>
+      {items.map((item, i) => (
+        <div key={item.id + i} className="adm-card">
+          <Field label={`分类 ID（英文标识，${workCounts[item.id] ?? 0} 件作品）`}>
+            <input
+              className="adm-input"
+              value={item.id}
+              onChange={(e) => update(i, { id: e.target.value.trim().replace(/\s+/g, '-') })}
+            />
+          </Field>
+          <Field label="封面图">
+            <ImageUpload
+              value={item.cover}
+              folder={`albums/${item.id}`}
+              onChange={(url) => update(i, { cover: url })}
+            />
+          </Field>
+          <Field label="名称（中 / 英）">
+            <BilingualInput value={item.title} onChange={(title) => update(i, { title })} />
+          </Field>
+          <Field label="副标题（中 / 英）">
+            <BilingualInput value={item.subtitle} onChange={(subtitle) => update(i, { subtitle })} />
+          </Field>
+          <Field label="系列名（中 / 英）">
+            <BilingualInput value={item.series} onChange={(series) => update(i, { series })} />
+          </Field>
+          <Field label="材质（中 / 英）">
+            <BilingualInput value={item.material} onChange={(material) => update(i, { material })} />
+          </Field>
+          <Field label="尺寸（中 / 英，或填同一文字）">
+            <BilingualInput
+              value={typeof item.size === 'string' ? { zh: item.size, en: item.size } : item.size}
+              onChange={(size) => update(i, { size })}
+            />
+          </Field>
+          <Field label="价格说明（中 / 英）">
+            <BilingualInput value={item.price} onChange={(price) => update(i, { price })} />
+          </Field>
+          <Field label="系列介绍（中 / 英）">
+            <BilingualInput multiline value={item.description} onChange={(description) => update(i, { description })} />
+          </Field>
+          <RemoveBtn onClick={() => remove(i)} label="删除此分类" />
+        </div>
+      ))}
     </div>
   );
 }
 
 function WorksPanel({ content, setContent }) {
   const items = content.worksManifest;
+  const albums = content.albums ?? [];
 
   const update = (index, patch) => {
     const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
@@ -124,31 +320,29 @@ function WorksPanel({ content, setContent }) {
   };
 
   const add = () => {
-    const id = `new-${Date.now()}`;
+    const defaultAlbum = albums[0]?.id ?? 'fag';
     setContent({
       ...content,
-      worksManifest: [...items, { album: 'fag', id, title: '新作品', image: '/uploads/new.jpg' }],
+      worksManifest: [...items, newWork(defaultAlbum)],
     });
   };
 
   const remove = (index) => {
+    if (!window.confirm('确定删除这件作品？')) return;
     setContent({ ...content, worksManifest: items.filter((_, i) => i !== index) });
   };
 
   return (
     <div className="adm-panel">
-      <div className="adm-panel-head">
-        <h2>作品集 ({items.length})</h2>
-        <button type="button" className="adm-btn adm-btn--ghost" onClick={add}>+ 新增</button>
-      </div>
+      <PanelHead title="作品条目" count={items.length} onAdd={add} />
       {items.map((item, i) => (
         <div key={item.id + i} className="adm-card">
           <div className="adm-card-row">
-            <Field label="专辑">
+            <Field label="所属分类">
               <select className="adm-input" value={item.album} onChange={(e) => update(i, { album: e.target.value })}>
-                <option value="fag">FAG</option>
-                <option value="digital">电子大头</option>
-                <option value="odod">ODOD</option>
+                {albums.map((a) => (
+                  <option key={a.id} value={a.id}>{a.title?.zh ?? a.id}</option>
+                ))}
               </select>
             </Field>
             <Field label="ID"><input className="adm-input" value={item.id} onChange={(e) => update(i, { id: e.target.value })} /></Field>
@@ -157,7 +351,7 @@ function WorksPanel({ content, setContent }) {
           <Field label="图片">
             <ImageUpload value={item.image} folder={`albums/${item.album}`} onChange={(url) => update(i, { image: url })} />
           </Field>
-          <button type="button" className="adm-btn adm-btn--danger" onClick={() => remove(i)}>删除</button>
+          <RemoveBtn onClick={() => remove(i)} />
         </div>
       ))}
     </div>
@@ -172,14 +366,31 @@ function StreetPanel({ content, setContent }) {
     setContent({ ...content, streetCases: next });
   };
 
+  const add = () => {
+    setContent({ ...content, streetCases: [...items, newStreetCase()] });
+  };
+
+  const remove = (index) => {
+    if (!window.confirm('确定删除此案例？')) return;
+    setContent({ ...content, streetCases: items.filter((_, i) => i !== index) });
+  };
+
   return (
     <div className="adm-panel">
-      <h2>街头案例</h2>
+      <PanelHead title="街头案例" count={items.length} onAdd={add} />
       {items.map((item, i) => (
-        <div key={item.id} className="adm-card">
+        <div key={item.id + i} className="adm-card">
+          <Field label="布局">
+            <select className="adm-input" value={item.layout} onChange={(e) => update(i, { layout: e.target.value })}>
+              {STREET_LAYOUTS.map((l) => (
+                <option key={l} value={l}>{l}</option>
+              ))}
+            </select>
+          </Field>
           <Field label="标题"><BilingualInput value={item.title} onChange={(v) => update(i, { title: v })} /></Field>
           <Field label="地点"><BilingualInput value={item.location} onChange={(v) => update(i, { location: v })} /></Field>
           <Field label="图片"><ImageUpload value={item.image} folder="street-cases" onChange={(url) => update(i, { image: url })} /></Field>
+          <RemoveBtn onClick={() => remove(i)} />
         </div>
       ))}
     </div>
@@ -189,22 +400,62 @@ function StreetPanel({ content, setContent }) {
 function PricingPanel({ content, setContent }) {
   const items = content.pricing;
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
+  const update = (index, patchObj) => {
+    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
     setContent({ ...content, pricing: next });
+  };
+
+  const add = () => {
+    setContent({ ...content, pricing: [...items, newPricingItem()] });
+  };
+
+  const remove = (index) => {
+    if (!window.confirm('确定删除此报价项？')) return;
+    setContent({ ...content, pricing: items.filter((_, i) => i !== index) });
+  };
+
+  const updateImage = (index, imgIndex, url) => {
+    const item = items[index];
+    const images = [...(item.images ?? (item.image ? [item.image] : []))];
+    images[imgIndex] = url;
+    update(index, { images, image: images[0] ?? '' });
+  };
+
+  const addImage = (index) => {
+    const item = items[index];
+    const images = [...(item.images ?? (item.image ? [item.image] : [])), '/uploads/new.jpg'];
+    update(index, { images, image: images[0] ?? '' });
+  };
+
+  const removeImage = (index, imgIndex) => {
+    const item = items[index];
+    const images = (item.images ?? []).filter((_, i) => i !== imgIndex);
+    update(index, { images, image: images[0] ?? '' });
   };
 
   return (
     <div className="adm-panel">
-      <h2>委托报价</h2>
-      {items.map((item, i) => (
-        <div key={item.id} className="adm-card">
-          <Field label="规格"><BilingualInput value={item.size} onChange={(v) => update(i, { size: v })} /></Field>
-          <Field label="产品"><BilingualInput value={item.product} onChange={(v) => update(i, { product: v })} /></Field>
-          <Field label="价格"><input className="adm-input" value={item.price} onChange={(e) => update(i, { price: e.target.value })} /></Field>
-          <Field label="图片"><ImageUpload value={item.image} folder="pricing" onChange={(url) => update(i, { image: url })} /></Field>
-        </div>
-      ))}
+      <PanelHead title="委托报价" count={items.length} onAdd={add} />
+      {items.map((item, i) => {
+        const images = item.images ?? (item.image ? [item.image] : []);
+        return (
+          <div key={item.id + i} className="adm-card">
+            <Field label="规格"><BilingualInput value={item.size} onChange={(v) => update(i, { size: v })} /></Field>
+            <Field label="产品"><BilingualInput value={item.product} onChange={(v) => update(i, { product: v })} /></Field>
+            <Field label="价格"><input className="adm-input" value={item.price} onChange={(e) => update(i, { price: e.target.value })} /></Field>
+            <Field label={`展示图片 (${images.length})`}>
+              {images.map((src, imgIdx) => (
+                <div key={imgIdx} className="adm-image-row">
+                  <ImageUpload value={src} folder="pricing" onChange={(url) => updateImage(i, imgIdx, url)} />
+                  <button type="button" className="adm-btn adm-btn--danger adm-btn--sm" onClick={() => removeImage(i, imgIdx)}>删</button>
+                </div>
+              ))}
+              <button type="button" className="adm-btn adm-btn--ghost" onClick={() => addImage(i)}>+ 添加图片框</button>
+            </Field>
+            <RemoveBtn onClick={() => remove(i)} />
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -212,17 +463,28 @@ function PricingPanel({ content, setContent }) {
 function SocialPanel({ content, setContent }) {
   const items = content.socialLinks;
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
+  const update = (index, patchObj) => {
+    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
     setContent({ ...content, socialLinks: next });
+  };
+
+  const add = () => {
+    setContent({ ...content, socialLinks: [...items, newSocialLink()] });
+  };
+
+  const remove = (index) => {
+    if (!window.confirm('确定删除此社媒链接？')) return;
+    setContent({ ...content, socialLinks: items.filter((_, i) => i !== index) });
   };
 
   return (
     <div className="adm-panel">
-      <h2>社媒链接</h2>
+      <PanelHead title="社媒链接" count={items.length} onAdd={add} />
       {items.map((item, i) => (
         <div key={`${item.platform}-${i}`} className="adm-card adm-card--compact">
-          <span className="adm-chip">{item.platform}</span>
+          <Field label="平台名称">
+            <input className="adm-input" value={item.platform} onChange={(e) => update(i, { platform: e.target.value })} />
+          </Field>
           <Field label="分组">
             <select className="adm-input" value={item.ip} onChange={(e) => update(i, { ip: e.target.value })}>
               <option value="呆">呆 · DANOSO</option>
@@ -231,8 +493,46 @@ function SocialPanel({ content, setContent }) {
             </select>
           </Field>
           <Field label="链接"><input className="adm-input" value={item.url} onChange={(e) => update(i, { url: e.target.value })} /></Field>
+          <RemoveBtn onClick={() => remove(i)} />
         </div>
       ))}
+    </div>
+  );
+}
+
+function ContactCardPanel({ content, setContent }) {
+  const card = content.contactCard ?? { image: '', hint: { zh: '', en: '' } };
+
+  const patch = (updates) => {
+    setContent({
+      ...content,
+      contactCard: {
+        ...card,
+        ...updates,
+        hint: updates.hint ? { ...card.hint, ...updates.hint } : card.hint,
+      },
+    });
+  };
+
+  return (
+    <div className="adm-panel">
+      <PanelHead title="扩列二维码" />
+      <p className="adm-panel-tip">
+        显示在网站最底部：桌面页脚左侧、手机「联系」页最下方。访客刷到底即可扫码加好友。
+      </p>
+      <Field label="二维码 / 扩列图">
+        <ImageUpload
+          value={card.image}
+          folder="contact"
+          onChange={(url) => patch({ image: url })}
+        />
+      </Field>
+      <Field label="扫码提示（中 / 英）">
+        <BilingualInput
+          value={card.hint ?? { zh: '', en: '' }}
+          onChange={(hint) => patch({ hint })}
+        />
+      </Field>
     </div>
   );
 }
@@ -240,28 +540,28 @@ function SocialPanel({ content, setContent }) {
 function EventsPanel({ content, setContent }) {
   const items = content.exhibitions;
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
+  const update = (index, patchObj) => {
+    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
     setContent({ ...content, exhibitions: next });
   };
 
   const add = () => {
-    setContent({
-      ...content,
-      exhibitions: [...items, { year: '2026', title: { zh: '新活动', en: 'New event' } }],
-    });
+    setContent({ ...content, exhibitions: [...items, newExhibition()] });
+  };
+
+  const remove = (index) => {
+    if (!window.confirm('确定删除此活动？')) return;
+    setContent({ ...content, exhibitions: items.filter((_, i) => i !== index) });
   };
 
   return (
     <div className="adm-panel">
-      <div className="adm-panel-head">
-        <h2>展览与活动</h2>
-        <button type="button" className="adm-btn adm-btn--ghost" onClick={add}>+ 新增</button>
-      </div>
+      <PanelHead title="展览与活动" count={items.length} onAdd={add} />
       {items.map((item, i) => (
         <div key={i} className="adm-card adm-card--compact">
           <Field label="年份"><input className="adm-input" value={item.year} onChange={(e) => update(i, { year: e.target.value })} /></Field>
           <Field label="标题"><BilingualInput value={item.title} onChange={(v) => update(i, { title: v })} /></Field>
+          <RemoveBtn onClick={() => remove(i)} />
         </div>
       ))}
     </div>
@@ -276,12 +576,24 @@ export default function AdminApp() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
+  const [apiOnline, setApiOnline] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/health')
+      .then((r) => r.ok && setApiOnline(true))
+      .catch(() => setApiOnline(false));
+  }, []);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await api.fetchContent();
-      setContent(data);
+      const defaults = cloneDefaultContent();
+      setContent({
+        ...data,
+        albums: data.albums ?? defaults.albums,
+        contactCard: data.contactCard ?? defaults.contactCard,
+      });
     } catch {
       setContent(cloneDefaultContent());
       setMsg('后端未连接，使用本地默认数据（保存需启动 server）');
@@ -307,12 +619,23 @@ export default function AdminApp() {
               setAuthed(true);
               load();
             } catch (err) {
-              alert(err.message);
+              const msg = err.message === 'Failed to fetch' || err.name === 'TypeError'
+                ? '无法连接后端。请先在项目目录运行：npm run dev'
+                : err.message;
+              alert(msg);
             }
           }}
         >
           <h1>ACAT 内容管理</h1>
           <p>登录后可修改网站文案、图片与链接</p>
+          {apiOnline === false && (
+            <p className="adm-login-warn">
+              后端未启动。请在终端运行：<code>npm run dev</code>
+            </p>
+          )}
+          {apiOnline === true && (
+            <p className="adm-login-ok">后端已连接，可以登录</p>
+          )}
           <input
             className="adm-input"
             type="password"
@@ -346,10 +669,12 @@ export default function AdminApp() {
 
   const panels = {
     text: <TextPanel content={content} setContent={setContent} />,
+    albums: <AlbumsPanel content={content} setContent={setContent} />,
     works: <WorksPanel content={content} setContent={setContent} />,
     street: <StreetPanel content={content} setContent={setContent} />,
     pricing: <PricingPanel content={content} setContent={setContent} />,
     social: <SocialPanel content={content} setContent={setContent} />,
+    contact: <ContactCardPanel content={content} setContent={setContent} />,
     events: <EventsPanel content={content} setContent={setContent} />,
   };
 

@@ -12,7 +12,7 @@ export function useNavigate() {
   const goTo = useCallback((sectionId, override) => {
     if (state) return;
     if (isMobile) {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'auto', block: 'start' });
       return;
     }
     triggerTransition({

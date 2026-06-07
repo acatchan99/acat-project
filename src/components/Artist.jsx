@@ -1,5 +1,6 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
+import ArtistEvents from './ArtistEvents';
 
 export default function Artist() {
   const { t } = useLang();
@@ -8,27 +9,40 @@ export default function Artist() {
 
   return (
     <section id="artists" className="artist-section">
-      <div className="container artist-grid">
-        <div className="artist-visual reveal">
-          <div className="artist-frame">
-            <img src="/artist-intro.jpg" alt="ACAT 陈吖猫" />
+      <div className="container">
+        <div className="artist-panel reveal">
+          <div className="artist-panel-body reveal reveal-d1">
+            <div className="artist-photo-wrap">
+              <div className="artist-photo">
+                <img src="/artist-intro.png" alt="ACAT 陈吖猫" />
+              </div>
+            </div>
+
+            <div className="artist-info">
+              <header className="artist-head">
+                <p className="section-tag">{a.tag}</p>
+                <h2 className="artist-title">ACAT CHAN</h2>
+              </header>
+              <div className="artist-intro">
+                <p className="artist-lead">{a.lead}</p>
+                <p className="artist-body">{a.body}</p>
+              </div>
+              <ArtistEvents />
+            </div>
           </div>
-          <p className="artist-caption">{a.caption}</p>
-        </div>
 
-        <div className="artist-copy">
-          <p className="section-tag reveal">{a.tag}</p>
-          <h2 className="artist-title reveal reveal-d1">ACAT CHAN</h2>
-          <p className="artist-lead reveal reveal-d2">{a.lead}</p>
-          <p className="artist-body reveal reveal-d3">{a.body}</p>
-
-          <button
-            type="button"
-            className="btn btn-blue reveal reveal-d4"
-            onClick={() => goTo('works')}
-          >
-            {a.cta}
-          </button>
+          <div className="artist-panel-sub reveal reveal-d2">
+            <p className="artist-caption">{a.caption}</p>
+            <div className="artist-panel-foot">
+              <button
+                type="button"
+                className="btn btn-blue artist-cta"
+                onClick={() => goTo('works')}
+              >
+                {a.cta}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

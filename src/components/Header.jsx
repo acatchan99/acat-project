@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { id: 'works', labelKey: 'works' },
   { id: 'street-cases', labelKey: 'streetCases' },
   { id: 'artists', labelKey: 'artist' },
+  { id: 'pricing', labelKey: 'pricing' },
   { id: 'contact', labelKey: 'contact' },
 ];
 
@@ -18,7 +19,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-row">
         <button type="button" className="logo" onClick={() => goTo('hero')}>
-          <img src="/fag-logo.png" alt="" className="logo-icon" />
+          <img src="/fag-logo.png" alt="ACAT 陈吖猫" className="logo-icon" />
           <span>ACAT</span>
         </button>
 

@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLang } from '../context/LangContext';
 import { getStreetCases } from '../data/streetCases';
 import { pickLang } from '../data/content';
+import ImageStackLightbox from './ImageStackLightbox';
 
 export default function StreetCases() {
   const { lang, t } = useLang();
   const sc = t('streetCases');
-  const [lightbox, setLightbox] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const cases = getStreetCases();
+
+  const lightboxItems = useMemo(
+    () => cases.map((item) => ({
+      id: item.id,
+      image: item.image,
+      title: pickLang(item.title, lang),
+      subtitle: pickLang(item.location, lang),
+    })),
+    [cases, lang],
+  );
 
   return (
     <section id="street-cases" className="street-cases">
@@ -28,7 +39,7 @@ export default function StreetCases() {
               type="button"
               className={`street-card street-card--${item.layout} reveal reveal-d${(i % 4) + 1}`}
               style={{ '--breath-delay': `${i * 0.5}s` }}
-              onClick={() => setLightbox(item)}
+              onClick={() => setLightboxIndex(i)}
             >
               <img src={item.image} alt={pickLang(item.title, lang)} loading="lazy" />
               <div className="street-card-overlay">
@@ -43,17 +54,13 @@ export default function StreetCases() {
         </div>
       </div>
 
-      {lightbox && (
-        <div className="street-lightbox" onClick={() => setLightbox(null)} role="presentation">
-          <div className="street-lightbox-panel" onClick={(e) => e.stopPropagation()}>
-            <button type="button" className="street-lightbox-close" onClick={() => setLightbox(null)} aria-label={sc.close}>×</button>
-            <img src={lightbox.image} alt={pickLang(lightbox.title, lang)} />
-            <div className="street-lightbox-caption">
-              <h3>{pickLang(lightbox.title, lang)}</h3>
-              <p>{pickLang(lightbox.location, lang)}</p>
-            </div>
-          </div>
-        </div>
+      {lightboxIndex !== null && (
+        <ImageStackLightbox
+          items={lightboxItems}
+          index={lightboxIndex}
+          onIndexChange={setLightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
       )}
     </section>
   );

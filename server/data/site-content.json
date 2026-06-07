@@ -6,6 +6,7 @@
         "works": "作品",
         "streetCases": "街头案例",
         "artist": "艺术家",
+        "pricing": "委托报价",
         "contact": "联系"
       },
       "hero": {
@@ -62,7 +63,7 @@
       "artist": {
         "tag": "艺术家",
         "lead": "中国独立艺术家，探索福瑞文化、涂鸦、公共空间与当代青年身份的交汇。",
-        "body": "标签 CY / ACAT · 2017 年起接触涂鸦艺术，活跃于街头涂鸦社区。创作涵盖布面喷绘、公共装置与展会现场创作。",
+        "body": "标签 CY / ACAT · 2017 年起接触涂鸦艺术，公共艺术专业，至今仍活跃于街头涂鸦创作。合作品牌：中国邮局、广汽本田 FIT、时尚天河、城市之丘、荔湾西园社区、歪脑商行等。",
         "cta": "查看作品集",
         "caption": "ACAT CHAN · 陈吖猫"
       },
@@ -101,7 +102,7 @@
         "eyebrow": "Contact",
         "title": "联系 · 社媒矩阵",
         "name": "陈吖猫 · ACAT CHAN · CYYYY",
-        "desc": "点击下方圆框跳转至各平台主页 · 委托与合作请通过页脚表单联系",
+        "desc": "点击下方圆框跳转至各平台主页 · 委托与合作请通过 QQ / 手机 / 微信联系",
         "followers": "粉丝"
       },
       "transition": {
@@ -111,6 +112,7 @@
         "works": "作品",
         "artists": "艺术家",
         "streetCases": "街头案例",
+        "pricing": "委托报价",
         "contact": "联系",
         "events": "展览"
       },
@@ -125,16 +127,26 @@
           "600mm",
           "800mm",
           "定制"
-        ]
+        ],
+        "swipeHint": "向左滑 · 下一张　｜　向右滑 · 上一张",
+        "navPrev": "上一张",
+        "navNext": "下一张"
       },
       "footer": {
         "title": "联系",
-        "email": "邮箱",
+        "phone": "手机",
+        "phoneValue": "13265395700",
+        "qq": "QQ",
+        "qqValue": "1739285224",
         "wechat": "微信",
+        "wechatValue": "CY / ACAT",
+        "wechatCopy": "ACAT_CHAN",
         "social": "社交",
-        "name": "姓名",
-        "comment": "留言",
-        "send": "发送",
+        "socialValue": "@ACAT_CHAN",
+        "cardAlt": "扩列联系卡，含 QQ 二维码",
+        "scanHint": "扫码扩列 · QQ 1739285224",
+        "tapCopy": "点击复制",
+        "copied": "已复制",
         "copy": "© 2026 ACAT CHAN. 保留所有权利。"
       }
     },
@@ -144,6 +156,7 @@
         "works": "Works",
         "streetCases": "Street Cases",
         "artist": "Artist",
+        "pricing": "Pricing",
         "contact": "Contact"
       },
       "hero": {
@@ -200,7 +213,7 @@
       "artist": {
         "tag": "Artist",
         "lead": "Chinese independent artist exploring the intersection between furry culture, graffiti, public space and contemporary youth identity.",
-        "body": "CY / ACAT · Active in street graffiti since 2017. Works span canvas spray paint, public installations and live exhibition pieces.",
+        "body": "CY / ACAT · Active in street graffiti since 2017, with a background in public art. Brand collaborations include China Post, GAC Honda FIT, Fashion Tianhe, City Hill, Liwan Xiyuan Community, Wainao Store, and more.",
         "cta": "view collection",
         "caption": "ACAT CHAN · 陈吖猫"
       },
@@ -239,7 +252,7 @@
         "eyebrow": "Contact",
         "title": "Contact · Social",
         "name": "ACAT CHAN · CYYYY",
-        "desc": "Tap a circle to visit each platform · For commissions, use the form below",
+        "desc": "Tap a circle to visit each platform · For commissions, contact via phone / QQ / WeChat",
         "followers": "followers"
       },
       "transition": {
@@ -249,6 +262,7 @@
         "works": "Works",
         "artists": "Artist",
         "streetCases": "Street Cases",
+        "pricing": "Pricing",
         "contact": "Contact",
         "events": "Events"
       },
@@ -263,16 +277,26 @@
           "600mm",
           "800mm",
           "Custom"
-        ]
+        ],
+        "swipeHint": "Swipe left · Next  |  Swipe right · Previous",
+        "navPrev": "Previous",
+        "navNext": "Next"
       },
       "footer": {
         "title": "Contact",
-        "email": "E-mail",
+        "phone": "Phone",
+        "phoneValue": "13265395700",
+        "qq": "QQ",
+        "qqValue": "1739285224",
         "wechat": "WeChat",
+        "wechatValue": "CY / ACAT",
+        "wechatCopy": "ACAT_CHAN",
         "social": "Social",
-        "name": "Name",
-        "comment": "Comment",
-        "send": "Send",
+        "socialValue": "@ACAT_CHAN",
+        "cardAlt": "Contact card with QQ QR code",
+        "scanHint": "Scan to connect · QQ 1739285224",
+        "tapCopy": "Tap to copy",
+        "copied": "Copied",
         "copy": "© 2026 ACAT CHAN. All rights reserved."
       }
     }
@@ -648,6 +672,11 @@
         "en": "Hand-painted canvas"
       },
       "price": "¥4,800",
+      "images": [
+        "/pricing/600-hand.jpg",
+        "/pricing/600-hand-alt.png",
+        "/albums/fag/fag-05.jpg"
+      ],
       "image": "/pricing/600-hand.jpg"
     },
     {
@@ -661,6 +690,11 @@
         "en": "Hand-painted canvas"
       },
       "price": "¥6,800",
+      "images": [
+        "/pricing/800-hand.png",
+        "/pricing/600-hand.jpg",
+        "/albums/fag/fag-11.jpg"
+      ],
       "image": "/pricing/800-hand.png"
     },
     {
@@ -674,6 +708,11 @@
         "en": "Stretched canvas frame"
       },
       "price": "¥5,800",
+      "images": [
+        "/pricing/405-hand.png",
+        "/pricing/600-hand-alt.png",
+        "/albums/fag/fag-02.png"
+      ],
       "image": "/pricing/405-hand.png"
     },
     {
@@ -687,6 +726,11 @@
         "en": "Character portrait"
       },
       "price": "¥800",
+      "images": [
+        "/albums/digital/digital-02.jpg",
+        "/albums/digital/digital-01.jpg",
+        "/albums/digital/digital-05.jpg"
+      ],
       "image": "/albums/digital/digital-02.jpg"
     }
   ],
@@ -804,79 +848,181 @@
     {
       "year": "2018",
       "title": {
-        "zh": "成都 FIT 成都度饭堂现场涂鸦表演",
-        "en": "Chengdu FIT live graffiti performance"
+        "zh": "广汽本田 FIT 飞度发布会现场涂鸦嘉宾",
+        "en": "GAC Honda FIT launch live graffiti guest"
       }
     },
     {
       "year": "2019",
       "title": {
-        "zh": "成都涂鸦成长 · 大学生野营涂鸦活动涂鸦表演",
-        "en": "Chengdu Graffiti Growth camp live performance"
+        "zh": "《看我涂鸦飞驰》大学城野营户外活动涂鸦嘉宾",
+        "en": "\"Watch Me Graffiti Fly\" university camp outdoor graffiti guest"
       }
     },
     {
       "year": "2021",
       "title": {
-        "zh": "THEONE 成都科华路酒吧高校联动涂鸦现场涂鸦表演",
-        "en": "THEONE Chengdu live graffiti performance"
+        "zh": "THEONE 广州沿江路酒吧广校联盟周年庆现场涂鸦嘉宾",
+        "en": "THEONE Guangzhou riverside bar alliance anniversary live graffiti guest"
       }
     },
     {
       "year": "2022",
       "title": {
-        "zh": "广州光之树 · 潮流街头涂鸦社区活动",
-        "en": "Guangzhou Light Tree street graffiti event"
+        "zh": "瘦狗之巅 · 广州线下涂鸦交流活动",
+        "en": "Shougou Summit · Guangzhou offline graffiti exchange"
       }
     },
     {
       "year": "2023",
       "title": {
-        "zh": "成都涂知岛 · 潮流涂鸦社区活动",
-        "en": "Chengdu Tu Zhi Dao graffiti community event"
+        "zh": "迷涂知返 · 广州涂鸦交流活动",
+        "en": "Lost & Found Graffiti · Guangzhou graffiti exchange"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "HAMJAM · 潮流涂鸦社区活动（广州城市之光）",
-        "en": "HAMJAM graffiti event (Guangzhou)"
+        "zh": "HAMJAM · 广州涂鸦交流活动（广州城市之丘）",
+        "en": "HAMJAM · Guangzhou graffiti exchange (City Hill)"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "山鬼 · 潮流涂鸦社区活动（广州白云国际）",
-        "en": "Shangui graffiti event (Guangzhou)"
+        "zh": "山夏 · 广州涂鸦交流活动（广州白云金钟）",
+        "en": "Shanxia · Guangzhou graffiti exchange (Baiyun Jinzhong)"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "涂鸦艺术家交流作品展（上海 ShakeWell）",
-        "en": "Graffiti artist exchange (Shanghai ShakeWell)"
+        "zh": "涂鸦公仔接龙连锁作品展（上海 ShakeWell）",
+        "en": "Graffiti figure relay group show (Shanghai ShakeWell)"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "BDMG 街头艺术展（北京 THEBOX）",
-        "en": "BDMG Street Art Exhibition (Beijing THEBOX)"
+        "zh": "BDMG 街头艺术展（北京 THEBOX 朝外年轻力中心 A 馆）",
+        "en": "BDMG Street Art Exhibition (Beijing THEBOX Chaowai)"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "草莓音乐节 · 潮流文化街头摊位涂鸦及装置",
-        "en": "Strawberry Music Festival graffiti installation"
+        "zh": "草莓音乐节 · 歪脑商行户外摊位涂鸦艺术装置",
+        "en": "Strawberry Music Festival · Wainao outdoor graffiti installation"
       }
     },
     {
       "year": "2024",
       "title": {
-        "zh": "PLAY IN THE 商圈「耍」涂鸦艺术展（北京三里屯）",
-        "en": "PLAY IN THE graffiti exhibition (Beijing Sanlitun)"
+        "zh": "PLAY IN THE 羊圈「耍」涂鸦艺术展（宁夏银川市宝丰银座 C1-16）",
+        "en": "PLAY IN THE Yangquan \"Shua\" graffiti exhibition (Yinchuan Baofeng)"
       }
     }
-  ]
+  ],
+  "albums": [
+    {
+      "id": "fag",
+      "cover": "/albums/fag/fag-02.png",
+      "title": {
+        "zh": "FAG",
+        "en": "FAG"
+      },
+      "subtitle": {
+        "zh": "Furry Art Graffiti · 涂鸦介绍",
+        "en": "Furry Art Graffiti · Intro"
+      },
+      "series": {
+        "zh": "FAG · Furry Art Graffiti",
+        "en": "FAG · Furry Art Graffiti"
+      },
+      "material": {
+        "zh": "Montana 马克笔 · Onelake 喷漆 · 布面",
+        "en": "Montana Markers · Onelake Spray on Canvas"
+      },
+      "size": "600 × 600 mm",
+      "price": {
+        "zh": "委托询价",
+        "en": "Commission"
+      },
+      "description": {
+        "zh": "FAG 系列——福瑞角色与街头涂鸦融合的布面喷绘作品，呈现 OC 角色的视觉身份。",
+        "en": "FAG series — canvas spray paintings merging furry characters with street graffiti culture."
+      }
+    },
+    {
+      "id": "digital",
+      "cover": "/albums/digital/digital-02.jpg",
+      "title": {
+        "zh": "电子大头",
+        "en": "Digital Avatars"
+      },
+      "subtitle": {
+        "zh": "数字绘画 · 角色头像",
+        "en": "Digital painting · Avatars"
+      },
+      "series": {
+        "zh": "电子大头",
+        "en": "Digital Avatars"
+      },
+      "material": {
+        "zh": "数字绘画 · 电子大头稿",
+        "en": "Digital painting · Avatar commissions"
+      },
+      "size": {
+        "zh": "电子大头",
+        "en": "Digital avatar"
+      },
+      "price": {
+        "zh": "约稿咨询",
+        "en": "Commission inquiry"
+      },
+      "description": {
+        "zh": "电子大头系列——福瑞角色电子头像稿件，呈现 OC 角色的数字视觉形象。",
+        "en": "Digital avatar series — furry character portrait commissions in digital form."
+      }
+    },
+    {
+      "id": "odod",
+      "cover": "/albums/odod/odod-01.jpg",
+      "title": {
+        "zh": "ODOD",
+        "en": "ODOD"
+      },
+      "subtitle": {
+        "zh": "DANOSO 呆乐兽 · 日常稿件",
+        "en": "DANOSO · Daily sketches"
+      },
+      "series": {
+        "zh": "ODOD · DANOSO 呆乐兽日常",
+        "en": "ODOD · DANOSO Daily"
+      },
+      "material": {
+        "zh": "数字稿件 · 角色日常",
+        "en": "Digital · Character daily sketches"
+      },
+      "size": {
+        "zh": "可变",
+        "en": "Variable"
+      },
+      "price": {
+        "zh": "系列创作",
+        "en": "Series work"
+      },
+      "description": {
+        "zh": "ODOD · DANOSO 呆乐兽的日常稿件——记录角色在日常场景中的表情、动作与生活瞬间。",
+        "en": "ODOD · DANOSO daily sketches — everyday moments, expressions and scenes of the character."
+      }
+    }
+  ],
+  "contactCard": {
+    "image": "/contact/expand-card.png",
+    "hint": {
+      "zh": "扫码扩列 · QQ 1739285224",
+      "en": "Scan to connect · QQ 1739285224"
+    }
+  }
 }

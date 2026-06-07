@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
-import { getPricingItems } from '../data/pricing';
+import { getPricingItems, getPricingImages } from '../data/pricing';
 import { pickLang } from '../data/content';
+import PricingDetail from './PricingDetail';
 
 export default function Pricing() {
   const { lang, t } = useLang();
   const { goTo } = useNavigate();
   const p = t('pricing');
+  const [detailIndex, setDetailIndex] = useState(null);
+  const [detailImageIndex, setDetailImageIndex] = useState(0);
+  const pricingItems = getPricingItems();
 
   return (
     <section id="pricing" className="pricing-section">
@@ -23,18 +28,31 @@ export default function Pricing() {
           </div>
 
           <ul className="pricing-list">
-            {getPricingItems().map((item) => (
+            {pricingItems.map((item, itemIdx) => (
               <li key={item.id} className="pricing-row">
                 <div className="pricing-spec">
                   <p className="pricing-spec-text">
                     {pickLang(item.size, lang)}{pickLang(item.product, lang)}
                   </p>
-                  <div className="pricing-sample">
-                    <img
-                      src={item.image}
-                      alt={pickLang(item.size, lang)}
-                      loading="lazy"
-                    />
+                  <div className="pricing-gallery">
+                    {getPricingImages(item).map((src, imgIdx) => (
+                      <button
+                        key={`${item.id}-${imgIdx}`}
+                        type="button"
+                        className="pricing-sample"
+                        onClick={() => {
+                          setDetailIndex(itemIdx);
+                          setDetailImageIndex(imgIdx);
+                        }}
+                        aria-label={`${pickLang(item.product, lang)} ${imgIdx + 1}`}
+                      >
+                        <img
+                          src={src}
+                          alt={`${pickLang(item.size, lang)} ${imgIdx + 1}`}
+                          loading="lazy"
+                        />
+                      </button>
+                    ))}
                   </div>
                 </div>
                 <span className="pricing-price">{item.price}</span>
@@ -49,6 +67,17 @@ export default function Pricing() {
           {p.cta}
         </button>
       </div>
+
+      {detailIndex !== null && (
+        <PricingDetail
+          items={pricingItems}
+          index={detailIndex}
+          imageIndex={detailImageIndex}
+          onIndexChange={setDetailIndex}
+          onImageIndexChange={setDetailImageIndex}
+          onClose={() => setDetailIndex(null)}
+        />
+      )}
     </section>
   );
 }

@@ -21,7 +21,12 @@ export function ContentProvider({ children }) {
   useEffect(() => {
     api.fetchContent()
       .then((remote) => {
-        setContent(remote);
+        const defaults = cloneDefaultContent();
+        setContent({
+          ...remote,
+          albums: remote.albums ?? defaults.albums,
+          contactCard: remote.contactCard ?? defaults.contactCard,
+        });
         setCmsOnline(true);
       })
       .catch(() => setCmsOnline(false));

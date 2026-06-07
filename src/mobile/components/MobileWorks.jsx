@@ -1,18 +1,26 @@
 import { useLang } from '../../context/LangContext';
-import { ALBUMS, getWorksByAlbum, pickLang } from '../../data/content';
+import { getAlbumTabs, getWorksByAlbum, getAlbumById, pickLang } from '../../data/content';
+import { useAlbumImagePreload, usePrefetchAllAlbums } from '../../hooks/useAlbumImagePreload';
 
 export default function MobileWorks({ album, onAlbumChange, onSelect }) {
   const { lang, t } = useLang();
   const w = t('works');
   const col = t('collections');
-
-  const albumLabels = {
-    fag: col.fag,
-    digital: col.digital,
-    odod: col.odod,
-  };
-
+  const tabs = getAlbumTabs();
   const works = getWorksByAlbum(album);
+  const activeAlbum = getAlbumById(album);
+  const tabIds = tabs.map((tab) => tab.id);
+
+  useAlbumImagePreload(album);
+  usePrefetchAllAlbums(tabIds);
+
+  const prefetchAlbum = (albumId) => {
+    getWorksByAlbum(albumId).forEach((item) => {
+      if (!item?.image) return;
+      const img = new Image();
+      img.src = item.image;
+    });
+  };
 
   return (
     <section id="works" className="m-section m-works">
@@ -22,7 +30,7 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
       </div>
 
       <div className="m-album-scroll" role="tablist" aria-label={w.title}>
-        {ALBUMS.map((item) => (
+        {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
@@ -30,14 +38,17 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
             aria-selected={album === item.id}
             className={`m-album-tab${album === item.id ? ' m-album-tab--active' : ''}`}
             onClick={() => onAlbumChange(item.id)}
+            onTouchStart={() => prefetchAlbum(item.id)}
           >
-            {albumLabels[item.id].title}
+            {pickLang(getAlbumById(item.id)?.title, lang)}
             <span className="m-album-count">{getWorksByAlbum(item.id).length}</span>
           </button>
         ))}
       </div>
 
-      <p className="m-works-sub">{albumLabels[album]?.subtitle ?? w.sub}</p>
+      <p className="m-works-sub">
+        {activeAlbum ? pickLang(activeAlbum.subtitle, lang) : w.sub}
+      </p>
 
       <div className="m-works-grid" key={album}>
         {works.map((work) => (
@@ -47,7 +58,13 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
             className="m-work-card"
             onClick={() => onSelect(work)}
           >
-            <img src={work.image} alt={pickLang(work.title, lang)} loading="lazy" />
+            <img
+              src={work.image}
+              alt={pickLang(work.title, lang)}
+              loading="eager"
+              decoding="async"
+              draggable={false}
+            />
             <span className="m-work-title">{pickLang(work.title, lang)}</span>
           </button>
         ))}
