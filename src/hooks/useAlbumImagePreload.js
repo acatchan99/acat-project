@@ -1,42 +1,31 @@
 import { useEffect } from 'react';
 import { getWorksByAlbum } from '../data/content';
+import { getDisplaySrc } from '../lib/imageUrl';
+import { wrapIndex } from './useDetailCardStack';
 
-/** 切换 / 进入作品集时预加载当前专辑全部缩略图 */
-export function useAlbumImagePreload(albumId) {
+/** 仅预加载当前专辑相邻几张（display 尺寸），避免一次拉满 20 张原图 */
+export function useAlbumImagePreload(albumId, currentIndex = 0) {
   useEffect(() => {
     if (!albumId) return undefined;
     const works = getWorksByAlbum(albumId);
-    const imgs = works.map((w) => {
-      if (!w?.image) return null;
+    if (!works.length) return undefined;
+
+    const indices = new Set([
+      wrapIndex(currentIndex, works.length),
+      wrapIndex(currentIndex + 1, works.length),
+      wrapIndex(currentIndex - 1, works.length),
+    ]);
+
+    const imgs = [...indices].map((i) => {
+      const src = works[i]?.image;
+      if (!src) return null;
       const img = new Image();
-      img.src = w.image;
+      img.src = getDisplaySrc(src);
       return img;
     });
-    return () => {
-      imgs.forEach((img) => {
-        if (img) img.src = '';
-      });
-    };
-  }, [albumId]);
-}
 
-/** 首次进入作品集时预取各专辑前几项 */
-export function usePrefetchAllAlbums(albumIds) {
-  const key = albumIds?.join(',') ?? '';
-  useEffect(() => {
-    if (!key) return undefined;
-    const ids = key.split(',');
-    const imgs = [];
-    ids.forEach((id) => {
-      getWorksByAlbum(id).slice(0, 6).forEach((w) => {
-        if (!w?.image) return;
-        const img = new Image();
-        img.src = w.image;
-        imgs.push(img);
-      });
-    });
     return () => {
-      imgs.forEach((img) => { img.src = ''; });
+      imgs.forEach((img) => { if (img) img.src = ''; });
     };
-  }, [key]);
+  }, [albumId, currentIndex]);
 }

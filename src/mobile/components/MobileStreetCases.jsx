@@ -3,6 +3,7 @@ import { useLang } from '../../context/LangContext';
 import { getStreetCases } from '../../data/streetCases';
 import { pickLang } from '../../data/content';
 import ImageStackLightbox from '../../components/ImageStackLightbox';
+import OptimizedImage from '../../components/OptimizedImage';
 
 export default function MobileStreetCases() {
   const { lang, t } = useLang();
@@ -34,7 +35,7 @@ export default function MobileStreetCases() {
             className="m-street-card"
             onClick={() => setLightboxIndex(i)}
           >
-            <img src={item.image} alt={pickLang(item.title, lang)} loading="lazy" />
+            <OptimizedImage src={item.image} alt={pickLang(item.title, lang)} variant="thumb" loading="lazy" />
             <span className="m-street-index">{String(i + 1).padStart(2, '0')}</span>
             <span className="m-street-meta">{pickLang(item.title, lang)}</span>
           </button>

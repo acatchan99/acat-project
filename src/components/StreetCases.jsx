@@ -3,6 +3,7 @@ import { useLang } from '../context/LangContext';
 import { getStreetCases } from '../data/streetCases';
 import { pickLang } from '../data/content';
 import ImageStackLightbox from './ImageStackLightbox';
+import OptimizedImage from './OptimizedImage';
 
 export default function StreetCases() {
   const { lang, t } = useLang();
@@ -41,7 +42,7 @@ export default function StreetCases() {
               style={{ '--breath-delay': `${i * 0.5}s` }}
               onClick={() => setLightboxIndex(i)}
             >
-              <img src={item.image} alt={pickLang(item.title, lang)} loading="lazy" />
+              <OptimizedImage src={item.image} alt={pickLang(item.title, lang)} variant="thumb" loading="lazy" />
               <div className="street-card-overlay">
                 <span className="street-card-index">{String(i + 1).padStart(2, '0')}</span>
                 <div className="street-card-meta">

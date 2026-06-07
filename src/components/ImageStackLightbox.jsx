@@ -4,6 +4,7 @@ import { useMediaQuery, MOBILE_QUERY } from '../hooks/useMediaQuery';
 import { useDetailCardStack } from '../hooks/useDetailCardStack';
 import { useOverlayHistory } from '../hooks/useOverlayHistory';
 import SwipeHint from './SwipeHint';
+import OptimizedImage from './OptimizedImage';
 
 /**
  * 全屏大图浏览（街头案例等）— 与作品集相同的左右滑轨切换
@@ -72,7 +73,12 @@ export default function ImageStackLightbox({
     return (
       <div className="gallery-lightbox-slide">
         <div className="gallery-lightbox-media">
-          <img src={slideItem.image} alt={slideItem.title ?? ''} draggable={false} decoding="sync" />
+          <OptimizedImage
+            src={slideItem.image}
+            alt={slideItem.title ?? ''}
+            variant="display"
+            loading="eager"
+          />
           <SwipeHint show={canNavigate} className="gallery-lightbox-hint" />
         </div>
         {(slideItem.title || slideItem.subtitle) && (

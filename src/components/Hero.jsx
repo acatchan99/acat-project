@@ -1,16 +1,20 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
+import { useMediaQuery, MOBILE_QUERY } from '../hooks/useMediaQuery';
 import GraffitiCanvas from './GraffitiCanvas';
+import OptimizedImage from './OptimizedImage';
 
 export default function Hero() {
   const { t } = useLang();
   const { goTo } = useNavigate();
   const hero = t('hero');
 
+  const isMobile = useMediaQuery(MOBILE_QUERY);
+
   return (
     <section id="hero" className="hero">
       <div className="hero-graffiti-bg">
-        <GraffitiCanvas variant="hero" />
+        {!isMobile && <GraffitiCanvas variant="hero" />}
         <div className="hero-graffiti-shade" />
         <div className="graffiti-tags graffiti-tags--hero" aria-hidden="true">
           <span className="graffiti-tag graffiti-tag--1">FAG</span>
@@ -22,7 +26,14 @@ export default function Hero() {
 
       <div className="hero-visual">
         <div className="hero-figure halftone">
-          <img src="/about-artist.jpg" alt="ACAT 陈吖猫" />
+          <OptimizedImage
+            src="/about-artist.jpg"
+            alt="ACAT 陈吖猫"
+            variant="display"
+            loading="eager"
+            fetchPriority="high"
+            className="hero-figure-img"
+          />
         </div>
         <div className="hero-deco hero-deco--arc" aria-hidden="true" />
         <div className="hero-deco hero-deco--star" aria-hidden="true">✦</div>

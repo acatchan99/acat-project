@@ -5,6 +5,8 @@ import { useNavigate } from '../hooks/useNavigate';
 import { wrapIndex } from '../hooks/useDetailCardStack';
 import DetailStackShell from './DetailStackShell';
 import SwipeHint from './SwipeHint';
+import OptimizedImage from './OptimizedImage';
+import { getDisplaySrc } from '../lib/imageUrl';
 
 export default function WorkDetail({ work, items = [], onChange, onClose }) {
   const { lang, t } = useLang();
@@ -34,7 +36,7 @@ export default function WorkDetail({ work, items = [], onChange, onClose }) {
     [next?.image, prev?.image].forEach((src) => {
       if (!src) return;
       const img = new Image();
-      img.src = src;
+      img.src = getDisplaySrc(src);
     });
   }, [canNavigate, list, currentIndex]);
 
@@ -55,7 +57,13 @@ export default function WorkDetail({ work, items = [], onChange, onClose }) {
       <div className="detail-grid">
         <div className="detail-gallery">
           <div className="detail-main">
-            <img src={current.image} alt={title} draggable={false} decoding="sync" />
+            <OptimizedImage
+              src={current.image}
+              alt={title}
+              variant="display"
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
           <SwipeHint show={canNavigate} />
         </div>

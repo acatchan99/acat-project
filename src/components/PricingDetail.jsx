@@ -14,6 +14,10 @@ import DetailStackShell from './DetailStackShell';
 
 import SwipeHint from './SwipeHint';
 
+import OptimizedImage from './OptimizedImage';
+
+import { getDisplaySrc } from '../lib/imageUrl';
+
 
 
 export default function PricingDetail({
@@ -69,7 +73,7 @@ export default function PricingDetail({
 
       const img = new Image();
 
-      img.src = imgSrc;
+      img.src = getDisplaySrc(imgSrc);
 
     });
 
@@ -117,7 +121,7 @@ export default function PricingDetail({
 
           <div className="detail-main">
 
-            <img src={src} alt={title} draggable={false} />
+            <OptimizedImage src={src} alt={title} variant="display" loading="eager" draggable={false} />
 
           </div>
 
@@ -145,7 +149,7 @@ export default function PricingDetail({
 
                 >
 
-                  <img src={thumbSrc} alt="" draggable={false} />
+                  <OptimizedImage src={thumbSrc} alt="" variant="thumb" loading="lazy" draggable={false} />
 
                 </button>
 

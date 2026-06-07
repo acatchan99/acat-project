@@ -411,7 +411,8 @@
   color: inherit;
 }
 
-.m-work-card img {
+.m-work-card img,
+.m-work-card-img {
   display: block;
   width: 100%;
   aspect-ratio: 1;

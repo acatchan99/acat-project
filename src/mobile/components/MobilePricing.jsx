@@ -4,6 +4,7 @@ import { useScrollTo } from '../../hooks/useScrollTo';
 import { getPricingItems, getPricingImages } from '../../data/pricing';
 import { pickLang } from '../../data/content';
 import PricingDetail from '../../components/PricingDetail';
+import OptimizedImage from '../../components/OptimizedImage';
 
 export default function MobilePricing() {
   const { lang, t } = useLang();
@@ -36,7 +37,7 @@ export default function MobilePricing() {
                     }}
                     aria-label={`${pickLang(item.product, lang)} ${i + 1}`}
                   >
-                    <img src={src} alt={`${pickLang(item.size, lang)} ${i + 1}`} loading="lazy" />
+                    <OptimizedImage src={src} alt={`${pickLang(item.size, lang)} ${i + 1}`} variant="thumb" loading="lazy" />
                   </button>
                 ))}
               </div>

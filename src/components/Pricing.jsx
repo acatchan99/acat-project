@@ -4,6 +4,7 @@ import { useNavigate } from '../hooks/useNavigate';
 import { getPricingItems, getPricingImages } from '../data/pricing';
 import { pickLang } from '../data/content';
 import PricingDetail from './PricingDetail';
+import OptimizedImage from './OptimizedImage';
 
 export default function Pricing() {
   const { lang, t } = useLang();
@@ -46,9 +47,10 @@ export default function Pricing() {
                         }}
                         aria-label={`${pickLang(item.product, lang)} ${imgIdx + 1}`}
                       >
-                        <img
+                        <OptimizedImage
                           src={src}
                           alt={`${pickLang(item.size, lang)} ${imgIdx + 1}`}
+                          variant="thumb"
                           loading="lazy"
                         />
                       </button>

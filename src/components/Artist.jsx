@@ -1,6 +1,7 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
 import ArtistEvents from './ArtistEvents';
+import OptimizedImage from './OptimizedImage';
 
 export default function Artist() {
   const { t } = useLang();
@@ -14,7 +15,7 @@ export default function Artist() {
           <div className="artist-panel-body reveal reveal-d1">
             <div className="artist-photo-wrap">
               <div className="artist-photo">
-                <img src="/artist-intro.png" alt="ACAT 陈吖猫" />
+                <OptimizedImage src="/artist-intro.png" alt="ACAT 陈吖猫" variant="display" loading="lazy" />
               </div>
             </div>
 

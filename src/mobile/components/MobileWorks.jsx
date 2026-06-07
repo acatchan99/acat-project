@@ -1,6 +1,8 @@
 import { useLang } from '../../context/LangContext';
 import { getAlbumTabs, getWorksByAlbum, getAlbumById, pickLang } from '../../data/content';
-import { useAlbumImagePreload, usePrefetchAllAlbums } from '../../hooks/useAlbumImagePreload';
+import { getThumbSrc } from '../../lib/imageUrl';
+import { useAlbumImagePreload } from '../../hooks/useAlbumImagePreload';
+import OptimizedImage from '../../components/OptimizedImage';
 
 export default function MobileWorks({ album, onAlbumChange, onSelect }) {
   const { lang, t } = useLang();
@@ -9,16 +11,14 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
   const tabs = getAlbumTabs();
   const works = getWorksByAlbum(album);
   const activeAlbum = getAlbumById(album);
-  const tabIds = tabs.map((tab) => tab.id);
 
   useAlbumImagePreload(album);
-  usePrefetchAllAlbums(tabIds);
 
   const prefetchAlbum = (albumId) => {
-    getWorksByAlbum(albumId).forEach((item) => {
+    getWorksByAlbum(albumId).slice(0, 4).forEach((item) => {
       if (!item?.image) return;
       const img = new Image();
-      img.src = item.image;
+      img.src = getThumbSrc(item.image);
     });
   };
 
@@ -51,19 +51,19 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
       </p>
 
       <div className="m-works-grid" key={album}>
-        {works.map((work) => (
+        {works.map((work, i) => (
           <button
             key={work.id}
             type="button"
             className="m-work-card"
             onClick={() => onSelect(work)}
           >
-            <img
+            <OptimizedImage
               src={work.image}
               alt={pickLang(work.title, lang)}
-              loading="eager"
-              decoding="async"
-              draggable={false}
+              variant="thumb"
+              loading={i < 4 ? 'eager' : 'lazy'}
+              className="m-work-card-img"
             />
             <span className="m-work-title">{pickLang(work.title, lang)}</span>
           </button>

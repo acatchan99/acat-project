@@ -1,6 +1,7 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollTo } from '../../hooks/useScrollTo';
 import ArtistEvents from '../../components/ArtistEvents';
+import OptimizedImage from '../../components/OptimizedImage';
 
 export default function MobileArtist() {
   const { t } = useLang();
@@ -13,7 +14,7 @@ export default function MobileArtist() {
         <div className="artist-panel-body">
           <div className="artist-photo-wrap">
             <div className="artist-photo">
-              <img src="/artist-intro.png" alt={a.caption} />
+              <OptimizedImage src="/artist-intro.png" alt={a.caption} variant="display" loading="lazy" />
             </div>
           </div>
 

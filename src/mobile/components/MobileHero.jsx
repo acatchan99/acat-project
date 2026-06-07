@@ -1,5 +1,6 @@
 import { useLang } from '../../context/LangContext';
 import { useScrollTo } from '../../hooks/useScrollTo';
+import OptimizedImage from '../../components/OptimizedImage';
 
 export default function MobileHero() {
   const { t } = useLang();
@@ -9,7 +10,14 @@ export default function MobileHero() {
   return (
     <section id="hero" className="m-hero">
       <div className="m-hero-visual">
-        <img src="/about-artist.jpg" alt="ACAT 陈吖猫" className="m-hero-photo" />
+        <OptimizedImage
+          src="/about-artist.jpg"
+          alt="ACAT 陈吖猫"
+          variant="display"
+          loading="eager"
+          fetchPriority="high"
+          className="m-hero-photo"
+        />
         <span className="m-hero-tag">FAG</span>
       </div>
       <h1 className="m-hero-title">
