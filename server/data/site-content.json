@@ -1,0 +1,882 @@
+{
+  "translations": {
+    "zh": {
+      "nav": {
+        "about": "关于",
+        "works": "作品",
+        "streetCases": "街头案例",
+        "artist": "艺术家",
+        "contact": "联系"
+      },
+      "hero": {
+        "headline": [
+          "同源",
+          "而生"
+        ],
+        "subline": "— 内在的艺术，各不相同",
+        "desc": "ACAT 陈吖猫 · Furry Art Graffiti — 将街头涂鸦与福瑞文化融合，以 600×600mm 布面手工喷绘呈现每一位 OC 角色的视觉身份。",
+        "cta": "浏览作品集"
+      },
+      "mission": {
+        "statement": [
+          "ACAT 不只是艺术，",
+          "更是身份的画布。"
+        ],
+        "pillars": [
+          {
+            "title": "创造力",
+            "desc": "手工喷绘与布面绘画，每一笔都是无法被 AI 复制的生命瞬间。"
+          },
+          {
+            "title": "情感",
+            "desc": "将 OC 角色审美转化为可触摸的实体，传递个体的视觉身份与情感。"
+          },
+          {
+            "title": "个性",
+            "desc": "在超市、街头与展会等公共空间中，解构福瑞文化的多元表达。"
+          }
+        ]
+      },
+      "collections": {
+        "pieces": "件",
+        "fag": {
+          "title": "FAG",
+          "subtitle": "Furry Art Graffiti · 涂鸦介绍"
+        },
+        "digital": {
+          "title": "电子大头",
+          "subtitle": "数字绘画 · 角色头像"
+        },
+        "odod": {
+          "title": "ODOD",
+          "subtitle": "DANOSO 呆乐兽 · 日常稿件"
+        }
+      },
+      "works": {
+        "title": "作品集",
+        "sub": "三大专辑 · 点击切换浏览",
+        "badge": "开放委托",
+        "moreInfo": "了解更多",
+        "view": "查看"
+      },
+      "artist": {
+        "tag": "艺术家",
+        "lead": "中国独立艺术家，探索福瑞文化、涂鸦、公共空间与当代青年身份的交汇。",
+        "body": "标签 CY / ACAT · 2017 年起接触涂鸦艺术，活跃于街头涂鸦社区。创作涵盖布面喷绘、公共装置与展会现场创作。",
+        "cta": "查看作品集",
+        "caption": "ACAT CHAN · 陈吖猫"
+      },
+      "streetCases": {
+        "eyebrow": "Street Cases",
+        "title": "街头涂鸦案例",
+        "desc": "从户外墙面到工作室现场——记录 ACAT 在公共空间的涂鸦创作与角色表达。",
+        "countLabel": "CASES",
+        "close": "关闭"
+      },
+      "pricing": {
+        "eyebrow": "Pricing",
+        "title": "委托报价",
+        "colSpec": "规格",
+        "colPrice": "价格",
+        "note": "以上为国内委托参考价 · 不含运费 · 具体以沟通确认为准",
+        "cta": "咨询报价"
+      },
+      "process": {
+        "eyebrow": "The Process",
+        "title": "创作流程",
+        "intro": "以下是我创作一件委托作品时通常经历的步骤。",
+        "steps": [
+          "委托确认后，我将提供明细报价。需支付 50% 定金或全额款项；作品自提或邮寄前，须完成全额支付。",
+          "请提供若干参考说明，便于我了解您的需求（例如：尺寸、配色、物种、设定图等）。",
+          "我会据此制作数字效果稿，用于确认初步概念。效果稿为粗略示意，仍保留创作空间与您提出修改的余地；此步骤用于最终方案确认。",
+          "开始创作！创作过程中可发送进度更新，也欢迎选择完成后再揭晓成品。",
+          "若报价包含邮寄，我将安排寄送并提供物流跟踪信息（如需要）。",
+          "除非另有约定，完成作品的照片可用于我的社交媒体及宣传再制作素材。"
+        ]
+      },
+      "events": {
+        "title": "展览与活动"
+      },
+      "contact": {
+        "eyebrow": "Contact",
+        "title": "联系 · 社媒矩阵",
+        "name": "陈吖猫 · ACAT CHAN · CYYYY",
+        "desc": "点击下方圆框跳转至各平台主页 · 委托与合作请通过页脚表单联系",
+        "followers": "粉丝"
+      },
+      "transition": {
+        "series": "ACAT · FAG",
+        "hero": "ACAT",
+        "about": "关于",
+        "works": "作品",
+        "artists": "艺术家",
+        "streetCases": "街头案例",
+        "contact": "联系",
+        "events": "展览"
+      },
+      "detail": {
+        "size": "尺寸",
+        "series": "系列",
+        "artist": "艺术家",
+        "material": "材质",
+        "close": "关闭",
+        "cta": "委托咨询",
+        "sizes": [
+          "600mm",
+          "800mm",
+          "定制"
+        ]
+      },
+      "footer": {
+        "title": "联系",
+        "email": "邮箱",
+        "wechat": "微信",
+        "social": "社交",
+        "name": "姓名",
+        "comment": "留言",
+        "send": "发送",
+        "copy": "© 2026 ACAT CHAN. 保留所有权利。"
+      }
+    },
+    "en": {
+      "nav": {
+        "about": "About",
+        "works": "Works",
+        "streetCases": "Street Cases",
+        "artist": "Artist",
+        "contact": "Contact"
+      },
+      "hero": {
+        "headline": [
+          "FROM THE",
+          "SAME"
+        ],
+        "subline": "— art inside is unique",
+        "desc": "ACAT CHAN · Furry Art Graffiti — merging street graffiti with furry culture through 600×600mm hand-painted canvas portraits of every OC identity.",
+        "cta": "To collection"
+      },
+      "mission": {
+        "statement": [
+          "ACAT IS NOT JUST ABOUT ART,",
+          "IT'S A CANVAS FOR IDENTITY."
+        ],
+        "pillars": [
+          {
+            "title": "CREATIVITY",
+            "desc": "Hand-painted canvas — every stroke is a moment no AI can replicate."
+          },
+          {
+            "title": "EMOTIONS",
+            "desc": "Transforming OC aesthetics into tangible works that carry individual visual identity."
+          },
+          {
+            "title": "INDIVIDUALITY",
+            "desc": "Deconstructing furry culture in supermarkets, streets, and exhibition spaces."
+          }
+        ]
+      },
+      "collections": {
+        "pieces": "works",
+        "fag": {
+          "title": "FAG",
+          "subtitle": "Furry Art Graffiti"
+        },
+        "digital": {
+          "title": "Digital Avatars",
+          "subtitle": "Digital furry avatar portraits"
+        },
+        "odod": {
+          "title": "ODOD",
+          "subtitle": "DANOSO · Daily character sketches"
+        }
+      },
+      "works": {
+        "title": "Portfolio",
+        "sub": "Three albums · Switch to browse",
+        "badge": "Available for commission",
+        "moreInfo": "more info",
+        "view": "View"
+      },
+      "artist": {
+        "tag": "Artist",
+        "lead": "Chinese independent artist exploring the intersection between furry culture, graffiti, public space and contemporary youth identity.",
+        "body": "CY / ACAT · Active in street graffiti since 2017. Works span canvas spray paint, public installations and live exhibition pieces.",
+        "cta": "view collection",
+        "caption": "ACAT CHAN · 陈吖猫"
+      },
+      "streetCases": {
+        "eyebrow": "Street Cases",
+        "title": "Street Graffiti Cases",
+        "desc": "From outdoor walls to studio sessions — documenting ACAT's graffiti work in public space.",
+        "countLabel": "CASES",
+        "close": "Close"
+      },
+      "pricing": {
+        "eyebrow": "Pricing",
+        "title": "Commission Rates",
+        "colSpec": "Spec",
+        "colPrice": "Price",
+        "note": "Reference prices for domestic commissions · Shipping excluded · Final quote on inquiry",
+        "cta": "Request a quote"
+      },
+      "process": {
+        "eyebrow": "The Process",
+        "title": "The Process",
+        "intro": "These are the usual steps I take to create an artwork.",
+        "steps": [
+          "Accepted commissions will be sent an itemised quote where either 50% deposit or full payment is required. Full payment must be sent before artwork collection/postage.",
+          "Please give me a couple points of reference for what you are looking to get done (e.g. size, colour, animal, ref sheet...).",
+          "I will use this to create a digital mockup to proof the initial concept. Mockups are rough, so there is room for creative freedom and your changes. This step helps me to confirm ideas for a final approval.",
+          "I paint the artwork! (I can send updates as I go, or most people like the surprise once delivered.)",
+          "I'll arrange postage if quoted, and details for tracking (if required).",
+          "Photos to use for my own socials and promotional reproduction materials (unless stated otherwise)."
+        ]
+      },
+      "events": {
+        "title": "Events & Exhibitions"
+      },
+      "contact": {
+        "eyebrow": "Contact",
+        "title": "Contact · Social",
+        "name": "ACAT CHAN · CYYYY",
+        "desc": "Tap a circle to visit each platform · For commissions, use the form below",
+        "followers": "followers"
+      },
+      "transition": {
+        "series": "ACAT · FAG",
+        "hero": "ACAT",
+        "about": "About",
+        "works": "Works",
+        "artists": "Artist",
+        "streetCases": "Street Cases",
+        "contact": "Contact",
+        "events": "Events"
+      },
+      "detail": {
+        "size": "Size",
+        "series": "Series",
+        "artist": "Artist",
+        "material": "Material",
+        "close": "Close",
+        "cta": "Commission inquiry",
+        "sizes": [
+          "600mm",
+          "800mm",
+          "Custom"
+        ]
+      },
+      "footer": {
+        "title": "Contact",
+        "email": "E-mail",
+        "wechat": "WeChat",
+        "social": "Social",
+        "name": "Name",
+        "comment": "Comment",
+        "send": "Send",
+        "copy": "© 2026 ACAT CHAN. All rights reserved."
+      }
+    }
+  },
+  "worksManifest": [
+    {
+      "album": "fag",
+      "id": "fag-01",
+      "title": "1",
+      "image": "/albums/fag/fag-01.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-02",
+      "title": "antou",
+      "image": "/albums/fag/fag-02.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-03",
+      "title": "BlackYanWu",
+      "image": "/albums/fag/fag-03.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-04",
+      "title": "Camus",
+      "image": "/albums/fag/fag-04.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-05",
+      "title": "DANOSO",
+      "image": "/albums/fag/fag-05.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-06",
+      "title": "Gintan",
+      "image": "/albums/fag/fag-06.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-07",
+      "title": "JD",
+      "image": "/albums/fag/fag-07.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-08",
+      "title": "KNIFE",
+      "image": "/albums/fag/fag-08.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-09",
+      "title": "KNIGHT",
+      "image": "/albums/fag/fag-09.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-10",
+      "title": "lc",
+      "image": "/albums/fag/fag-10.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-11",
+      "title": "LONG",
+      "image": "/albums/fag/fag-11.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-12",
+      "title": "nx",
+      "image": "/albums/fag/fag-12.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-13",
+      "title": "OREZ",
+      "image": "/albums/fag/fag-13.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-14",
+      "title": "paco",
+      "image": "/albums/fag/fag-14.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-15",
+      "title": "XUAN",
+      "image": "/albums/fag/fag-15.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-16",
+      "title": "xz",
+      "image": "/albums/fag/fag-16.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-17",
+      "title": "yemao",
+      "image": "/albums/fag/fag-17.png"
+    },
+    {
+      "album": "fag",
+      "id": "fag-18",
+      "title": "ZEAGLE",
+      "image": "/albums/fag/fag-18.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-19",
+      "title": "华",
+      "image": "/albums/fag/fag-19.jpg"
+    },
+    {
+      "album": "fag",
+      "id": "fag-20",
+      "title": "南瓜补丁",
+      "image": "/albums/fag/fag-20.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-01",
+      "title": "9号球",
+      "image": "/albums/digital/digital-01.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-02",
+      "title": "ak",
+      "image": "/albums/digital/digital-02.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-03",
+      "title": "LYKOS",
+      "image": "/albums/digital/digital-03.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-04",
+      "title": "zero",
+      "image": "/albums/digital/digital-04.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-05",
+      "title": "北行",
+      "image": "/albums/digital/digital-05.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-06",
+      "title": "笨狼",
+      "image": "/albums/digital/digital-06.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-07",
+      "title": "比尔",
+      "image": "/albums/digital/digital-07.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-08",
+      "title": "橙色",
+      "image": "/albums/digital/digital-08.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-09",
+      "title": "哈基添",
+      "image": "/albums/digital/digital-09.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-10",
+      "title": "麦麦",
+      "image": "/albums/digital/digital-10.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-11",
+      "title": "木笙",
+      "image": "/albums/digital/digital-11.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-12",
+      "title": "奈特knight",
+      "image": "/albums/digital/digital-12.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-13",
+      "title": "青桔",
+      "image": "/albums/digital/digital-13.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-14",
+      "title": "星仔",
+      "image": "/albums/digital/digital-14.jpg"
+    },
+    {
+      "album": "digital",
+      "id": "digital-15",
+      "title": "鱼干",
+      "image": "/albums/digital/digital-15.jpg"
+    },
+    {
+      "album": "odod",
+      "id": "odod-01",
+      "title": "Image_1777869560025_272",
+      "image": "/albums/odod/odod-01.jpg"
+    },
+    {
+      "album": "odod",
+      "id": "odod-02",
+      "title": "IMG_20260502_143740_1777704224253edit",
+      "image": "/albums/odod/odod-02.jpg"
+    },
+    {
+      "album": "odod",
+      "id": "odod-03",
+      "title": "mmexport1764408917266",
+      "image": "/albums/odod/odod-03.jpg"
+    },
+    {
+      "album": "odod",
+      "id": "odod-04",
+      "title": "QQ_1776537185478",
+      "image": "/albums/odod/odod-04.png"
+    },
+    {
+      "album": "odod",
+      "id": "odod-05",
+      "title": "Snipaste_2026-06-07_02-57-05",
+      "image": "/albums/odod/odod-05.png"
+    },
+    {
+      "album": "odod",
+      "id": "odod-06",
+      "title": "Snipaste_2026-06-07_02-58-29",
+      "image": "/albums/odod/odod-06.png"
+    },
+    {
+      "album": "odod",
+      "id": "odod-07",
+      "title": "Snipaste_2026-06-07_02-59-09",
+      "image": "/albums/odod/odod-07.png"
+    },
+    {
+      "album": "odod",
+      "id": "odod-08",
+      "title": "Snipaste_2026-06-07_03-00-21",
+      "image": "/albums/odod/odod-08.png"
+    },
+    {
+      "album": "odod",
+      "id": "odod-09",
+      "title": "Snipaste_2026-06-07_03-00-55",
+      "image": "/albums/odod/odod-09.png"
+    }
+  ],
+  "streetCases": [
+    {
+      "id": "wildstyle",
+      "image": "/street-cases/case-02.jpg",
+      "layout": "hero",
+      "title": {
+        "zh": "野风格字母墙绘",
+        "en": "Wildstyle Letter Piece"
+      },
+      "location": {
+        "zh": "户外墙面 · 2023",
+        "en": "Outdoor Wall · 2023"
+      }
+    },
+    {
+      "id": "hoodie",
+      "image": "/street-cases/case-03.jpg",
+      "layout": "tall",
+      "title": {
+        "zh": "角色墙绘",
+        "en": "Character Mural"
+      },
+      "location": {
+        "zh": "街头墙面 · 2025",
+        "en": "Street Wall · 2025"
+      }
+    },
+    {
+      "id": "fighter",
+      "image": "/street-cases/case-01.jpg",
+      "layout": "wide",
+      "title": {
+        "zh": "格斗主题涂鸦",
+        "en": "Fighting Game Piece"
+      },
+      "location": {
+        "zh": "混凝土墙 · 2024",
+        "en": "Concrete Wall · 2024"
+      }
+    },
+    {
+      "id": "battle",
+      "image": "/street-cases/case-07.jpg",
+      "layout": "wide",
+      "title": {
+        "zh": "角色对战场景",
+        "en": "Character Battle Scene"
+      },
+      "location": {
+        "zh": "红墙创作 · 2024",
+        "en": "Red Wall · 2024"
+      }
+    },
+    {
+      "id": "live",
+      "image": "/street-cases/case-06.jpg",
+      "layout": "square",
+      "title": {
+        "zh": "创作者与作品",
+        "en": "Artist & Mural"
+      },
+      "location": {
+        "zh": "现场 · 2025",
+        "en": "On Site · 2025"
+      }
+    },
+    {
+      "id": "chrome",
+      "image": "/street-cases/case-04.jpg",
+      "layout": "square",
+      "title": {
+        "zh": "Chrome 骑士",
+        "en": "Chrome Knight"
+      },
+      "location": {
+        "zh": "红墙 · 2026",
+        "en": "Red Wall · 2026"
+      }
+    },
+    {
+      "id": "neon",
+      "image": "/street-cases/case-05.jpg",
+      "layout": "square",
+      "title": {
+        "zh": "霓虹工作室",
+        "en": "Neon Studio Piece"
+      },
+      "location": {
+        "zh": "室内创作 · 2025",
+        "en": "Indoor Studio · 2025"
+      }
+    }
+  ],
+  "pricing": [
+    {
+      "id": "fag-600",
+      "size": {
+        "zh": "600毫米 × 600毫米",
+        "en": "600mm × 600mm"
+      },
+      "product": {
+        "zh": "布面手工喷绘",
+        "en": "Hand-painted canvas"
+      },
+      "price": "¥4,800",
+      "image": "/pricing/600-hand.jpg"
+    },
+    {
+      "id": "fag-800",
+      "size": {
+        "zh": "800毫米 × 800毫米",
+        "en": "800mm × 800mm"
+      },
+      "product": {
+        "zh": "布面手工喷绘",
+        "en": "Hand-painted canvas"
+      },
+      "price": "¥6,800",
+      "image": "/pricing/800-hand.png"
+    },
+    {
+      "id": "frame-405",
+      "size": {
+        "zh": "405毫米 × 505毫米",
+        "en": "405mm × 505mm"
+      },
+      "product": {
+        "zh": "绷布油画框",
+        "en": "Stretched canvas frame"
+      },
+      "price": "¥5,800",
+      "image": "/pricing/405-hand.png"
+    },
+    {
+      "id": "digital-avatar",
+      "size": {
+        "zh": "电子大头",
+        "en": "Digital avatar"
+      },
+      "product": {
+        "zh": "角色头像稿件",
+        "en": "Character portrait"
+      },
+      "price": "¥800",
+      "image": "/albums/digital/digital-02.jpg"
+    }
+  ],
+  "socialLinks": [
+    {
+      "platform": "tiktok",
+      "ip": "呆",
+      "url": "https://www.tiktok.com/@danoso99?is_from_webapp=1&sender_device=pc",
+      "followers": 5
+    },
+    {
+      "platform": "threads",
+      "ip": "呆",
+      "url": "https://www.threads.com/@danoso99?xmt=AQF04HIgXMVevv9uLhDTu11CqpiSZ3eTBQ1QKrnc4HuUgoU",
+      "followers": 14
+    },
+    {
+      "platform": "小红书",
+      "ip": "猫",
+      "url": "https://xhslink.com/m/2ZtJPyuiCV",
+      "followers": 3096
+    },
+    {
+      "platform": "微博",
+      "ip": "猫",
+      "url": "https://weibo.com/u/5178081697",
+      "followers": 464
+    },
+    {
+      "platform": "X",
+      "ip": "猫",
+      "url": "https://x.com/acatchan99",
+      "followers": 17
+    },
+    {
+      "platform": "Mastodon",
+      "ip": "猫",
+      "url": "https://mastodon.social/home",
+      "followers": null
+    },
+    {
+      "platform": "pinterest",
+      "ip": "ACAT",
+      "url": "https://co.pinterest.com/",
+      "followers": null
+    },
+    {
+      "platform": "deviantart",
+      "ip": "ACAT",
+      "url": "https://www.deviantart.com/",
+      "followers": null
+    },
+    {
+      "platform": "Sheezy",
+      "ip": "ACAT",
+      "url": "https://sheezy.art/",
+      "followers": null
+    },
+    {
+      "platform": "A站",
+      "ip": "ACAT",
+      "url": "https://www.artstation.com/channels/character_animation",
+      "followers": null
+    },
+    {
+      "platform": "P站",
+      "ip": "ACAT",
+      "url": "https://www.pixiv.net/",
+      "followers": null
+    },
+    {
+      "platform": "cara",
+      "ip": "ACAT",
+      "url": "https://cara.app/explore",
+      "followers": null
+    },
+    {
+      "platform": "Itaku",
+      "ip": "ACAT",
+      "url": "https://itaku.ee/home/images",
+      "followers": null
+    },
+    {
+      "platform": "Newgrounds",
+      "ip": "ACAT",
+      "url": "https://www.newgrounds.com/",
+      "followers": null
+    },
+    {
+      "platform": "unvale",
+      "ip": "ACAT",
+      "url": "https://unvale.io/?searchMode=all&contentType=characters",
+      "followers": null
+    },
+    {
+      "platform": "Artfight",
+      "ip": "ACAT",
+      "url": "https://artfight.net/",
+      "followers": null
+    },
+    {
+      "platform": "CharacterHub",
+      "ip": "ACAT",
+      "url": "https://characterhub.com/myhome",
+      "followers": null
+    },
+    {
+      "platform": "Inkbunny",
+      "ip": "ACAT",
+      "url": "https://inkbunny.net/",
+      "followers": null
+    }
+  ],
+  "exhibitions": [
+    {
+      "year": "2018",
+      "title": {
+        "zh": "成都 FIT 成都度饭堂现场涂鸦表演",
+        "en": "Chengdu FIT live graffiti performance"
+      }
+    },
+    {
+      "year": "2019",
+      "title": {
+        "zh": "成都涂鸦成长 · 大学生野营涂鸦活动涂鸦表演",
+        "en": "Chengdu Graffiti Growth camp live performance"
+      }
+    },
+    {
+      "year": "2021",
+      "title": {
+        "zh": "THEONE 成都科华路酒吧高校联动涂鸦现场涂鸦表演",
+        "en": "THEONE Chengdu live graffiti performance"
+      }
+    },
+    {
+      "year": "2022",
+      "title": {
+        "zh": "广州光之树 · 潮流街头涂鸦社区活动",
+        "en": "Guangzhou Light Tree street graffiti event"
+      }
+    },
+    {
+      "year": "2023",
+      "title": {
+        "zh": "成都涂知岛 · 潮流涂鸦社区活动",
+        "en": "Chengdu Tu Zhi Dao graffiti community event"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "HAMJAM · 潮流涂鸦社区活动（广州城市之光）",
+        "en": "HAMJAM graffiti event (Guangzhou)"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "山鬼 · 潮流涂鸦社区活动（广州白云国际）",
+        "en": "Shangui graffiti event (Guangzhou)"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "涂鸦艺术家交流作品展（上海 ShakeWell）",
+        "en": "Graffiti artist exchange (Shanghai ShakeWell)"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "BDMG 街头艺术展（北京 THEBOX）",
+        "en": "BDMG Street Art Exhibition (Beijing THEBOX)"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "草莓音乐节 · 潮流文化街头摊位涂鸦及装置",
+        "en": "Strawberry Music Festival graffiti installation"
+      }
+    },
+    {
+      "year": "2024",
+      "title": {
+        "zh": "PLAY IN THE 商圈「耍」涂鸦艺术展（北京三里屯）",
+        "en": "PLAY IN THE graffiti exhibition (Beijing Sanlitun)"
+      }
+    }
+  ]
+}

@@ -48,11 +48,6 @@ export default function Contact() {
                         {item.handle && (
                           <span className="social-chip-handle">{item.handle}</span>
                         )}
-                        {item.followers != null && (
-                          <span className="social-chip-meta">
-                            {item.followers} {c.followers}
-                          </span>
-                        )}
                       </a>
                     </li>
                   ))}

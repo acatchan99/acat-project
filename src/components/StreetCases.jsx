@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useLang } from '../context/LangContext';
-import { STREET_CASES } from '../data/streetCases';
+import { getStreetCases } from '../data/streetCases';
 import { pickLang } from '../data/content';
 
 export default function StreetCases() {
   const { lang, t } = useLang();
   const sc = t('streetCases');
   const [lightbox, setLightbox] = useState(null);
+  const cases = getStreetCases();
 
   return (
     <section id="street-cases" className="street-cases">
@@ -17,11 +18,11 @@ export default function StreetCases() {
             <h2 className="street-title">{sc.title}</h2>
             <p className="street-desc">{sc.desc}</p>
           </div>
-          <span className="street-count">{STREET_CASES.length} {sc.countLabel}</span>
+          <span className="street-count">{cases.length} {sc.countLabel}</span>
         </header>
 
         <div className="street-bento">
-          {STREET_CASES.map((item, i) => (
+          {cases.map((item, i) => (
             <button
               key={item.id}
               type="button"

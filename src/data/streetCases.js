@@ -1,4 +1,4 @@
-export const STREET_CASES = [
+let streetCasesCache = [
   {
     id: 'wildstyle',
     image: '/street-cases/case-02.jpg',
@@ -49,3 +49,13 @@ export const STREET_CASES = [
     location: { zh: '室内创作 · 2025', en: 'Indoor Studio · 2025' },
   },
 ];
+
+export function applyStreetCases(next) {
+  streetCasesCache = next;
+}
+
+export function getStreetCases() {
+  return streetCasesCache;
+}
+
+export const STREET_CASES = streetCasesCache;

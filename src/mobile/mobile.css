@@ -1,0 +1,602 @@
+/* ── Mobile shell (方案 B) ── */
+.mobile-shell {
+  --m-header-h: 3.25rem;
+  --m-tabbar-h: 3.5rem;
+  --m-pad: 1.25rem;
+  --m-safe-bottom: env(safe-area-inset-bottom, 0px);
+  min-height: 100dvh;
+  background: var(--black);
+  color: var(--white);
+}
+
+.m-main {
+  padding-top: var(--m-header-h);
+  padding-bottom: calc(var(--m-tabbar-h) + var(--m-safe-bottom) + 0.5rem);
+}
+
+/* ── Header ── */
+.m-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: var(--m-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--m-pad);
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.m-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.m-logo-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+.m-lang {
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* ── Tab bar ── */
+.m-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: calc(var(--m-tabbar-h) + var(--m-safe-bottom));
+  padding-bottom: var(--m-safe-bottom);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-light);
+}
+
+.m-tab {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.m-tab:active {
+  color: var(--white);
+}
+
+/* ── Buttons ── */
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.m-btn--white {
+  background: var(--white);
+  color: var(--black);
+}
+
+.m-btn--blue {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* ── Hero ── */
+.m-hero {
+  padding: 1.5rem var(--m-pad) 2.5rem;
+  text-align: center;
+}
+
+.m-hero-visual {
+  position: relative;
+  width: min(72vw, 280px);
+  margin: 0 auto 1.5rem;
+  aspect-ratio: 3 / 4;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.m-hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.m-hero-tag {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  padding: 0.25rem 0.5rem;
+  background: var(--blue);
+  border-radius: 4px;
+}
+
+.m-hero-title {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.m-hero-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.m-hero-desc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* ── Sections ── */
+.m-section {
+  padding: 2rem var(--m-pad);
+  border-top: 1px solid var(--border-light);
+}
+
+.m-section-title {
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.m-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.4rem;
+}
+
+.m-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ── About ── */
+.m-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.m-pillar {
+  padding: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  background: var(--surface-dark);
+}
+
+.m-pillar h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.m-pillar p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ── Artist ── */
+.m-artist-card {
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.m-artist-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.m-artist-caption {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface-dark);
+}
+
+.m-artist-lead {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.m-artist-body {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Works ── */
+.m-works-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.m-works-head .m-section-title {
+  margin-bottom: 0;
+}
+
+.m-album-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.m-album-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.m-album-tab {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--surface-dark);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.m-album-tab--active {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.m-album-count {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.m-works-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.m-works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.m-work-card {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.m-work-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-light);
+  margin-bottom: 0.4rem;
+}
+
+.m-work-title {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Street cases ── */
+.m-street-desc {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.m-street-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.m-street-card {
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3 / 4;
+}
+
+.m-street-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.m-street-index {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.4rem;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+}
+
+.m-street-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 0.5rem 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  text-align: left;
+}
+
+/* ── Lightbox ── */
+.m-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--m-pad);
+}
+
+.m-lightbox-panel {
+  position: relative;
+  width: 100%;
+  max-height: 90dvh;
+  overflow: auto;
+}
+
+.m-lightbox-panel img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.m-lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.m-lightbox-caption {
+  padding: 0.75rem 0;
+}
+
+.m-lightbox-caption h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.m-lightbox-caption p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Contact ── */
+.m-contact-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.m-contact-desc {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.m-social-group {
+  margin-bottom: 1.5rem;
+}
+
+.m-social-group h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.m-social-group-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.m-social-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.m-social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  background: var(--surface-dark);
+  color: inherit;
+  text-decoration: none;
+}
+
+.m-social-abbr {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.m-social-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.m-social-platform {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.m-social-handle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.m-footer {
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ── Work detail (mobile overrides) ── */
+.mobile-shell .detail-overlay {
+  z-index: 600;
+  padding: 0;
+  align-items: flex-end;
+}
+
+.mobile-shell .detail-panel {
+  width: 100%;
+  max-height: 92dvh;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1.25rem;
+  overflow-y: auto;
+  animation: m-slide-up 0.3s ease;
+}
+
+@keyframes m-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.mobile-shell .detail-grid {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.mobile-shell .detail-main {
+  aspect-ratio: 1;
+  max-height: 50vh;
+}
+
+.mobile-shell .detail-close {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.mobile-shell .detail-title {
+  font-size: 1.25rem;
+}
+
+.mobile-shell .detail-cta {
+  width: 100%;
+}
+
+/* Hide desktop-only chrome when mobile app is active */
+.mobile-shell ~ .site-header,
+.mobile-shell ~ .page-transition {
+  display: none;
+}

@@ -1,4 +1,4 @@
-export const PRICING_ITEMS = [
+let pricingCache = [
   {
     id: 'fag-600',
     size: { zh: '600毫米 × 600毫米', en: '600mm × 600mm' },
@@ -28,3 +28,13 @@ export const PRICING_ITEMS = [
     image: '/albums/digital/digital-02.jpg',
   },
 ];
+
+export function applyPricing(next) {
+  pricingCache = next;
+}
+
+export function getPricingItems() {
+  return pricingCache;
+}
+
+export const PRICING_ITEMS = pricingCache;

@@ -1,4 +1,4 @@
-import links from './social-links.json';
+import defaultLinks from './social-links.json';
 
 const PLATFORM_LABELS = {
   tiktok: { zh: 'TikTok', en: 'TikTok', abbr: 'TK' },
@@ -42,11 +42,17 @@ export const SOCIAL_GROUPS = [
   },
 ];
 
+let linksCache = [...defaultLinks];
+
+export function applySocialLinks(next) {
+  linksCache = next;
+}
+
 function extractHandle(url) {
   try {
     const u = new URL(url);
-    const path = u.pathname.replace(/\/$/, '');
-    const parts = path.split('/').filter(Boolean);
+    const pathPart = u.pathname.replace(/\/$/, '');
+    const parts = pathPart.split('/').filter(Boolean);
     if (parts.length === 0) return u.hostname.replace('www.', '');
     const last = parts[parts.length - 1];
     if (last.startsWith('@')) return last;
@@ -58,7 +64,7 @@ function extractHandle(url) {
 }
 
 export function getSocialLinks() {
-  return links.map((item) => {
+  return linksCache.map((item) => {
     const meta = PLATFORM_LABELS[item.platform] ?? {
       zh: item.platform,
       en: item.platform,

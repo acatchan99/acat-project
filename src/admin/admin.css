@@ -1,0 +1,278 @@
+.adm-shell {
+  min-height: 100dvh;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: var(--font, 'Inter', 'Noto Sans SC', sans-serif);
+}
+
+.adm-loading,
+.adm-login {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.adm-login-box {
+  width: min(100%, 380px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  background: #111;
+}
+
+.adm-login-box h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.adm-login-box p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.5rem;
+}
+
+.adm-back {
+  font-size: 0.8rem;
+  color: #008dff;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.adm-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.adm-header h1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.adm-header p {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.adm-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.adm-body {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  min-height: calc(100dvh - 72px);
+}
+
+.adm-nav {
+  padding: 1rem 0.75rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.adm-nav-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adm-nav-btn--active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.adm-main {
+  padding: 1.25rem 1.5rem 3rem;
+  overflow: auto;
+}
+
+.adm-panel h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+}
+
+.adm-panel h2:first-child {
+  margin-top: 0;
+}
+
+.adm-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.adm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.adm-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+}
+
+.adm-input,
+.adm-field select,
+.adm-field textarea {
+  width: 100%;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  color: #fff;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.adm-bilingual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.adm-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  background: #111;
+}
+
+.adm-card--compact {
+  padding: 0.85rem;
+}
+
+.adm-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.adm-chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  background: #008dff;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.adm-image {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adm-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.adm-image .adm-input {
+  flex: 1;
+  min-width: 160px;
+}
+
+.adm-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.adm-btn--primary {
+  background: #008dff;
+  color: #fff;
+}
+
+.adm-btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.adm-btn--danger {
+  background: transparent;
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  color: #ff8888;
+  margin-top: 0.5rem;
+}
+
+.adm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .adm-body {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .adm-nav-btn {
+    white-space: nowrap;
+  }
+
+  .adm-bilingual {
+    grid-template-columns: 1fr;
+  }
+}

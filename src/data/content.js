@@ -49,47 +49,38 @@ function buildTitle(entry, indexInAlbum) {
   return raw;
 }
 
-const albumCounters = { fag: 0, digital: 0, odod: 0 };
+function buildWorksFromManifest(source) {
+  const albumCounters = { fag: 0, digital: 0, odod: 0 };
+  return [...source]
+    .sort(
+      (a, b) =>
+        ALBUM_ORDER.indexOf(a.album) - ALBUM_ORDER.indexOf(b.album)
+        || a.id.localeCompare(b.id, undefined, { numeric: true }),
+    )
+    .map((entry) => {
+      albumCounters[entry.album] += 1;
+      const idx = albumCounters[entry.album];
+      const meta = ALBUM_META[entry.album];
 
-export const WORKS = [...manifest]
-  .sort(
-    (a, b) =>
-      ALBUM_ORDER.indexOf(a.album) - ALBUM_ORDER.indexOf(b.album)
-      || a.id.localeCompare(b.id, undefined, { numeric: true }),
-  )
-  .map((entry) => {
-    albumCounters[entry.album] += 1;
-    const idx = albumCounters[entry.album];
-    const meta = ALBUM_META[entry.album];
-
-    return {
-      id: entry.id,
-      albumId: entry.album,
-      title: buildTitle(entry, idx),
-      series: meta.series,
-      artist: 'ACAT CHAN',
-      material: meta.material,
-      size: meta.size,
-      price: meta.price,
-      image: entry.image,
-      images: [entry.image],
-      description: meta.description,
-    };
-  });
-
-export const COLLECTIONS = [
-  { id: 'fag', image: '/albums/fag/fag-02.png' },
-  { id: 'digital', image: '/albums/digital/digital-02.jpg' },
-  { id: 'odod', image: '/albums/odod/odod-01.jpg' },
-];
-
-export const ALBUMS = COLLECTIONS.map(({ id, image }) => ({ id, cover: image }));
-
-export function getWorksByAlbum(albumId) {
-  return WORKS.filter((w) => w.albumId === albumId);
+      return {
+        id: entry.id,
+        albumId: entry.album,
+        title: buildTitle(entry, idx),
+        series: meta.series,
+        artist: 'ACAT CHAN',
+        material: meta.material,
+        size: meta.size,
+        price: meta.price,
+        image: entry.image,
+        images: [entry.image],
+        description: meta.description,
+      };
+    });
 }
 
-export const EXHIBITIONS = [
+let worksCache = buildWorksFromManifest(manifest);
+
+let exhibitionsCache = [
   { year: '2018', title: { zh: '成都 FIT 成都度饭堂现场涂鸦表演', en: 'Chengdu FIT live graffiti performance' } },
   { year: '2019', title: { zh: '成都涂鸦成长 · 大学生野营涂鸦活动涂鸦表演', en: 'Chengdu Graffiti Growth camp live performance' } },
   { year: '2021', title: { zh: 'THEONE 成都科华路酒吧高校联动涂鸦现场涂鸦表演', en: 'THEONE Chengdu live graffiti performance' } },
@@ -102,6 +93,32 @@ export const EXHIBITIONS = [
   { year: '2024', title: { zh: '草莓音乐节 · 潮流文化街头摊位涂鸦及装置', en: 'Strawberry Music Festival graffiti installation' } },
   { year: '2024', title: { zh: 'PLAY IN THE 商圈「耍」涂鸦艺术展（北京三里屯）', en: 'PLAY IN THE graffiti exhibition (Beijing Sanlitun)' } },
 ];
+
+export function applyWorksManifest(next) {
+  worksCache = buildWorksFromManifest(next);
+}
+
+export function applyExhibitions(next) {
+  exhibitionsCache = next;
+}
+
+export function getExhibitions() {
+  return exhibitionsCache;
+}
+
+export const EXHIBITIONS = exhibitionsCache;
+
+export const COLLECTIONS = [
+  { id: 'fag', image: '/albums/fag/fag-02.png' },
+  { id: 'digital', image: '/albums/digital/digital-02.jpg' },
+  { id: 'odod', image: '/albums/odod/odod-01.jpg' },
+];
+
+export const ALBUMS = COLLECTIONS.map(({ id, image }) => ({ id, cover: image }));
+
+export function getWorksByAlbum(albumId) {
+  return worksCache.filter((w) => w.albumId === albumId);
+}
 
 export const GALLERY_CHARS = [
   'BAIDU', 'AMIU', '日々', 'BRANDY',

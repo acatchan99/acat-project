@@ -1,6 +1,6 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
-import { PRICING_ITEMS } from '../data/pricing';
+import { getPricingItems } from '../data/pricing';
 import { pickLang } from '../data/content';
 
 export default function Pricing() {
@@ -23,7 +23,7 @@ export default function Pricing() {
           </div>
 
           <ul className="pricing-list">
-            {PRICING_ITEMS.map((item) => (
+            {getPricingItems().map((item) => (
               <li key={item.id} className="pricing-row">
                 <div className="pricing-spec">
                   <p className="pricing-spec-text">

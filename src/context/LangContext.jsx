@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { translations } from '../i18n/translations';
+import { useContent } from './ContentContext';
 
 const LangContext = createContext(null);
 
 export function LangProvider({ children }) {
+  const { content } = useContent();
+  const translations = content.translations;
   const [lang, setLang] = useState(() => {
     if (typeof window === 'undefined') return 'zh';
     return localStorage.getItem('acat-lang') || 'zh';
@@ -18,7 +20,7 @@ export function LangProvider({ children }) {
     setLang((l) => (l === 'zh' ? 'en' : 'zh'));
   }, []);
 
-  const t = useCallback((section) => translations[lang][section], [lang]);
+  const t = useCallback((section) => translations[lang][section], [lang, translations]);
 
   return (
     <LangContext.Provider value={{ lang, setLang, toggleLang, t }}>
