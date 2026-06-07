@@ -74,7 +74,6 @@ export default function Works({ album, onAlbumChange, onSelect }) {
                   alt={pickLang(work.title, lang)}
                   variant="thumb"
                   loading={i < 6 ? 'eager' : 'lazy'}
-                  className="product-grid-img"
                 />
               </button>
               <div className="product-info">

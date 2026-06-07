@@ -73,12 +73,7 @@ export default function ImageStackLightbox({
     return (
       <div className="gallery-lightbox-slide">
         <div className="gallery-lightbox-media">
-          <OptimizedImage
-            src={slideItem.image}
-            alt={slideItem.title ?? ''}
-            variant="display"
-            loading="eager"
-          />
+          <OptimizedImage src={slideItem.image} alt={slideItem.title ?? ''} variant="display" loading="eager" draggable={false} />
           <SwipeHint show={canNavigate} className="gallery-lightbox-hint" />
         </div>
         {(slideItem.title || slideItem.subtitle) && (

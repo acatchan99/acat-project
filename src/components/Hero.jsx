@@ -1,6 +1,5 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
-import { useMediaQuery, MOBILE_QUERY } from '../hooks/useMediaQuery';
 import GraffitiCanvas from './GraffitiCanvas';
 import OptimizedImage from './OptimizedImage';
 
@@ -9,12 +8,10 @@ export default function Hero() {
   const { goTo } = useNavigate();
   const hero = t('hero');
 
-  const isMobile = useMediaQuery(MOBILE_QUERY);
-
   return (
     <section id="hero" className="hero">
       <div className="hero-graffiti-bg">
-        {!isMobile && <GraffitiCanvas variant="hero" />}
+        <GraffitiCanvas variant="hero" />
         <div className="hero-graffiti-shade" />
         <div className="graffiti-tags graffiti-tags--hero" aria-hidden="true">
           <span className="graffiti-tag graffiti-tag--1">FAG</span>

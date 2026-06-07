@@ -3,7 +3,7 @@ import { getWorksByAlbum } from '../data/content';
 import { getDisplaySrc } from '../lib/imageUrl';
 import { wrapIndex } from './useDetailCardStack';
 
-/** 仅预加载当前专辑相邻几张（display 尺寸），避免一次拉满 20 张原图 */
+/** 仅预加载相邻 3 张 display 图，避免一次拉满原图 */
 export function useAlbumImagePreload(albumId, currentIndex = 0) {
   useEffect(() => {
     if (!albumId) return undefined;

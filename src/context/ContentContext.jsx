@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { cloneDefaultContent } from '../data/defaultContent';
 import { applySiteContent } from '../data/contentSync';
+import { mergeRemoteContent } from '../lib/mergeRemoteContent';
 import { api } from '../lib/api';
 
 const ContentContext = createContext(null);
@@ -21,12 +22,7 @@ export function ContentProvider({ children }) {
   useEffect(() => {
     api.fetchContent()
       .then((remote) => {
-        const defaults = cloneDefaultContent();
-        setContent({
-          ...remote,
-          albums: remote.albums ?? defaults.albums,
-          contactCard: remote.contactCard ?? defaults.contactCard,
-        });
+        setContent(mergeRemoteContent(remote));
         setCmsOnline(true);
       })
       .catch(() => setCmsOnline(false));

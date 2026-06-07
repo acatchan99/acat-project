@@ -64,6 +64,7 @@ export default function MobileWorks({ album, onAlbumChange, onSelect }) {
               variant="thumb"
               loading={i < 4 ? 'eager' : 'lazy'}
               className="m-work-card-img"
+              draggable={false}
             />
             <span className="m-work-title">{pickLang(work.title, lang)}</span>
           </button>

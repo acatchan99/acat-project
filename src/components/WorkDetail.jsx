@@ -57,13 +57,7 @@ export default function WorkDetail({ work, items = [], onChange, onClose }) {
       <div className="detail-grid">
         <div className="detail-gallery">
           <div className="detail-main">
-            <OptimizedImage
-              src={current.image}
-              alt={title}
-              variant="display"
-              loading="eager"
-              fetchPriority="high"
-            />
+            <OptimizedImage src={current.image} alt={title} variant="display" loading="eager" draggable={false} />
           </div>
           <SwipeHint show={canNavigate} />
         </div>

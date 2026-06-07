@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react';
 import { getThumbSrc, getDisplaySrc } from '../lib/imageUrl';
 
-/**
- * @param {'thumb'|'display'|'original'} variant
- */
+/** 优先 WebP，失败自动回退原图，不影响 CMS / 文案逻辑 */
 export default function OptimizedImage({
   src,
   alt = '',
@@ -12,25 +10,13 @@ export default function OptimizedImage({
   fetchPriority,
   className = '',
   draggable = false,
-  onLoad,
 }) {
-  const primary = variant === 'thumb'
-    ? getThumbSrc(src)
-    : variant === 'display'
-      ? getDisplaySrc(src)
-      : src;
-
+  const primary = variant === 'display' ? getDisplaySrc(src) : getThumbSrc(src);
   const [currentSrc, setCurrentSrc] = useState(primary);
-  const [loaded, setLoaded] = useState(false);
 
   const handleError = useCallback(() => {
-    if (currentSrc !== src && src) setCurrentSrc(src);
+    if (src && currentSrc !== src) setCurrentSrc(src);
   }, [currentSrc, src]);
-
-  const handleLoad = useCallback((e) => {
-    setLoaded(true);
-    onLoad?.(e);
-  }, [onLoad]);
 
   if (!src) return null;
 
@@ -42,9 +28,8 @@ export default function OptimizedImage({
       decoding="async"
       draggable={draggable}
       fetchPriority={fetchPriority}
-      className={`${className}${loaded ? ' img-loaded' : ''}`.trim()}
+      className={className}
       onError={handleError}
-      onLoad={handleLoad}
     />
   );
 }

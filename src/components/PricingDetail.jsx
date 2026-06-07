@@ -13,9 +13,7 @@ import { wrapIndex } from '../hooks/useDetailCardStack';
 import DetailStackShell from './DetailStackShell';
 
 import SwipeHint from './SwipeHint';
-
 import OptimizedImage from './OptimizedImage';
-
 import { getDisplaySrc } from '../lib/imageUrl';
 
 

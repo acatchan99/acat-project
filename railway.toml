@@ -1,0 +1,13 @@
+# Railway：仅 API + CMS 后台（官网在 Vercel）
+# 连接 GitHub 后 Railway 会自动读取此文件一键部署
+# 文档：https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npm run build:web && npm install --prefix server --omit=dev"
+
+[deploy]
+startCommand = "npm run start:api"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"

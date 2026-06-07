@@ -1,16 +1,26 @@
 import { Suspense, lazy } from 'react';
 import { useMediaQuery, MOBILE_QUERY } from './hooks/useMediaQuery';
+import DesktopApp from './desktop/DesktopApp';
+import MobileApp from './mobile/MobileApp';
 
-const DesktopApp = lazy(() => import('./desktop/DesktopApp'));
-const MobileApp = lazy(() => import('./mobile/MobileApp'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
+
+function AppLoader() {
+  return (
+    <div className="app-loader" role="status" aria-label="Loading">
+      <span className="app-loader-dot" />
+      <span className="app-loader-dot" />
+      <span className="app-loader-dot" />
+    </div>
+  );
+}
 
 export default function Root() {
   const isAdmin = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
 
   if (isAdmin) {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={<AppLoader />}>
         <AdminApp />
       </Suspense>
     );
@@ -21,10 +31,5 @@ export default function Root() {
 
 function SiteApp() {
   const isMobile = useMediaQuery(MOBILE_QUERY);
-
-  return (
-    <Suspense fallback={null}>
-      {isMobile ? <MobileApp /> : <DesktopApp />}
-    </Suspense>
-  );
+  return isMobile ? <MobileApp /> : <DesktopApp />;
 }
