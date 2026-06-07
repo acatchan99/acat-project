@@ -1,0 +1,110 @@
+﻿[
+  {
+    "platform": "tiktok",
+    "ip": "呆",
+    "url": "https://www.tiktok.com/@danoso99?is_from_webapp=1&sender_device=pc",
+    "followers": 5
+  },
+  {
+    "platform": "threads",
+    "ip": "呆",
+    "url": "https://www.threads.com/@danoso99?xmt=AQF04HIgXMVevv9uLhDTu11CqpiSZ3eTBQ1QKrnc4HuUgoU",
+    "followers": 14
+  },
+  {
+    "platform": "小红书",
+    "ip": "猫",
+    "url": "https://xhslink.com/m/2ZtJPyuiCV",
+    "followers": 3096
+  },
+  {
+    "platform": "微博",
+    "ip": "猫",
+    "url": "https://weibo.com/u/5178081697",
+    "followers": 464
+  },
+  {
+    "platform": "X",
+    "ip": "猫",
+    "url": "https://x.com/acatchan99",
+    "followers": 17
+  },
+  {
+    "platform": "Mastodon",
+    "ip": "猫",
+    "url": "https://mastodon.social/home",
+    "followers": null
+  },
+  {
+    "platform": "pinterest",
+    "ip": "ACAT",
+    "url": "https://co.pinterest.com/",
+    "followers": null
+  },
+  {
+    "platform": "deviantart",
+    "ip": "ACAT",
+    "url": "https://www.deviantart.com/",
+    "followers": null
+  },
+  {
+    "platform": "Sheezy",
+    "ip": "ACAT",
+    "url": "https://sheezy.art/",
+    "followers": null
+  },
+  {
+    "platform": "A站",
+    "ip": "ACAT",
+    "url": "https://www.artstation.com/channels/character_animation",
+    "followers": null
+  },
+  {
+    "platform": "P站",
+    "ip": "ACAT",
+    "url": "https://www.pixiv.net/",
+    "followers": null
+  },
+  {
+    "platform": "cara",
+    "ip": "ACAT",
+    "url": "https://cara.app/explore",
+    "followers": null
+  },
+  {
+    "platform": "Itaku",
+    "ip": "ACAT",
+    "url": "https://itaku.ee/home/images",
+    "followers": null
+  },
+  {
+    "platform": "Newgrounds",
+    "ip": "ACAT",
+    "url": "https://www.newgrounds.com/",
+    "followers": null
+  },
+  {
+    "platform": "unvale",
+    "ip": "ACAT",
+    "url": "https://unvale.io/?searchMode=all&contentType=characters",
+    "followers": null
+  },
+  {
+    "platform": "Artfight",
+    "ip": "ACAT",
+    "url": "https://artfight.net/",
+    "followers": null
+  },
+  {
+    "platform": "CharacterHub",
+    "ip": "ACAT",
+    "url": "https://characterhub.com/myhome",
+    "followers": null
+  },
+  {
+    "platform": "Inkbunny",
+    "ip": "ACAT",
+    "url": "https://inkbunny.net/",
+    "followers": null
+  }
+]
