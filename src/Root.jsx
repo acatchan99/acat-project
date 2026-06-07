@@ -1,5 +1,8 @@
 import { Suspense, lazy } from 'react';
 import { useMediaQuery, MOBILE_QUERY } from './hooks/useMediaQuery';
+import { ContentProvider } from './context/ContentContext';
+import { LangProvider } from './context/LangContext';
+import { PageTransitionProvider } from './context/PageTransitionContext';
 import DesktopApp from './desktop/DesktopApp';
 import MobileApp from './mobile/MobileApp';
 
@@ -26,7 +29,15 @@ export default function Root() {
     );
   }
 
-  return <SiteApp />;
+  return (
+    <ContentProvider>
+      <LangProvider>
+        <PageTransitionProvider>
+          <SiteApp />
+        </PageTransitionProvider>
+      </LangProvider>
+    </ContentProvider>
+  );
 }
 
 function SiteApp() {

@@ -1,4 +1,13 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
+function resolveApiBase() {
+  const envBase = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '');
+  if (typeof window === 'undefined') return envBase;
+  // CMS 后台与 API 同域时走相对路径，避免跨域与错误配置
+  if (window.location.pathname.startsWith('/admin')) return '';
+  if (envBase && window.location.origin === envBase) return '';
+  return envBase;
+}
+
+const API_BASE = resolveApiBase();
 
 function getToken() {
   return localStorage.getItem('acat-admin-token') ?? '';

@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import { cloneDefaultContent } from '../data/defaultContent';
 import { api, setAdminToken } from '../lib/api';
 import {
   newWork,
@@ -8,9 +7,9 @@ import {
   newPricingItem,
   newSocialLink,
   newExhibition,
-  newMissionPillar,
-  newProcessStep,
 } from './templates';
+import { normalizeAdminContent, patchContent, patchListItem } from './contentState';
+import TextPanel from './TextPanel';
 
 const TABS = [
   { id: 'text', label: '文案' },
@@ -56,21 +55,22 @@ function Field({ label, children }) {
 
 function BilingualInput({ value, onChange, multiline = false }) {
   const Tag = multiline ? 'textarea' : 'input';
+  const safe = { zh: value?.zh ?? '', en: value?.en ?? '' };
   return (
     <div className="adm-bilingual">
       <Tag
         className="adm-input"
-        value={value?.zh ?? ''}
+        value={safe.zh}
         placeholder="中文"
         rows={multiline ? 3 : undefined}
-        onChange={(e) => onChange({ ...value, zh: e.target.value })}
+        onChange={(e) => onChange({ ...safe, zh: e.target.value })}
       />
       <Tag
         className="adm-input"
-        value={value?.en ?? ''}
+        value={safe.en}
         placeholder="English"
         rows={multiline ? 3 : undefined}
-        onChange={(e) => onChange({ ...value, en: e.target.value })}
+        onChange={(e) => onChange({ ...safe, en: e.target.value })}
       />
     </div>
   );
@@ -106,194 +106,15 @@ function ImageUpload({ value, folder, onChange }) {
   );
 }
 
-function TextPanel({ content, setContent }) {
-  const patch = (lang, section, patchObj) => {
-    setContent((prev) => ({
-      ...prev,
-      translations: {
-        ...prev.translations,
-        [lang]: {
-          ...prev.translations[lang],
-          [section]: { ...prev.translations[lang][section], ...patchObj },
-        },
-      },
-    }));
-  };
-
-  /** 同一字段中英双语一次更新，避免连续 patch 互相覆盖 */
-  const patchBilingual = (section, key, value) => {
-    setContent((prev) => ({
-      ...prev,
-      translations: {
-        ...prev.translations,
-        zh: {
-          ...prev.translations.zh,
-          [section]: { ...prev.translations.zh[section], [key]: value.zh },
-        },
-        en: {
-          ...prev.translations.en,
-          [section]: { ...prev.translations.en[section], [key]: value.en },
-        },
-      },
-    }));
-  };
-
-  const patchMissionPillars = (zhPillars, enPillars) => {
-    setContent((prev) => ({
-      ...prev,
-      translations: {
-        ...prev.translations,
-        zh: { ...prev.translations.zh, mission: { ...prev.translations.zh.mission, pillars: zhPillars } },
-        en: { ...prev.translations.en, mission: { ...prev.translations.en.mission, pillars: enPillars } },
-      },
-    }));
-  };
-
-  const patchProcessSteps = (zhSteps, enSteps) => {
-    setContent((prev) => ({
-      ...prev,
-      translations: {
-        ...prev.translations,
-        zh: { ...prev.translations.zh, process: { ...prev.translations.zh.process, steps: zhSteps } },
-        en: { ...prev.translations.en, process: { ...prev.translations.en.process, steps: enSteps } },
-      },
-    }));
-  };
-
-  const zh = content.translations.zh;
-  const en = content.translations.en;
-
-  return (
-    <div className="adm-panel">
-      <h2>首页 Hero</h2>
-      <Field label="标题行 1（中/英）">
-        <div className="adm-bilingual">
-          <input className="adm-input" value={zh.hero.headline?.[0] ?? ''} onChange={(e) => patch('zh', 'hero', { headline: [e.target.value, zh.hero.headline?.[1] ?? ''] })} />
-          <input className="adm-input" value={en.hero.headline?.[0] ?? ''} onChange={(e) => patch('en', 'hero', { headline: [e.target.value, en.hero.headline?.[1] ?? ''] })} />
-        </div>
-      </Field>
-      <Field label="标题行 2（中/英）">
-        <div className="adm-bilingual">
-          <input className="adm-input" value={zh.hero.headline?.[1] ?? ''} onChange={(e) => patch('zh', 'hero', { headline: [zh.hero.headline?.[0] ?? '', e.target.value] })} />
-          <input className="adm-input" value={en.hero.headline?.[1] ?? ''} onChange={(e) => patch('en', 'hero', { headline: [en.hero.headline?.[0] ?? '', e.target.value] })} />
-        </div>
-      </Field>
-      <Field label="副标题"><BilingualInput value={{ zh: zh.hero.subline, en: en.hero.subline }} onChange={(v) => patchBilingual('hero', 'subline', v)} /></Field>
-      <Field label="描述"><BilingualInput multiline value={{ zh: zh.hero.desc, en: en.hero.desc }} onChange={(v) => patchBilingual('hero', 'desc', v)} /></Field>
-
-      <h2>关于 / 艺术家</h2>
-      <Field label="艺术家简介"><BilingualInput multiline value={{ zh: zh.artist.lead, en: en.artist.lead }} onChange={(v) => patchBilingual('artist', 'lead', v)} /></Field>
-      <Field label="艺术家详情"><BilingualInput multiline value={{ zh: zh.artist.body, en: en.artist.body }} onChange={(v) => patchBilingual('artist', 'body', v)} /></Field>
-
-      <h2>联系</h2>
-      <Field label="名称"><BilingualInput value={{ zh: zh.contact.name, en: en.contact.name }} onChange={(v) => patchBilingual('contact', 'name', v)} /></Field>
-      <Field label="说明"><BilingualInput multiline value={{ zh: zh.contact.desc, en: en.contact.desc }} onChange={(v) => patchBilingual('contact', 'desc', v)} /></Field>
-
-      <h2>关于 · 三大支柱</h2>
-      {zh.mission.pillars.map((pillar, i) => (
-        <div key={i} className="adm-card adm-card--compact">
-          <Field label={`支柱 ${i + 1} · 标题`}>
-            <BilingualInput
-              value={{ zh: pillar.title, en: en.mission.pillars[i]?.title ?? '' }}
-              onChange={(v) => {
-                const zhPillars = [...zh.mission.pillars];
-                const enPillars = [...en.mission.pillars];
-                zhPillars[i] = { ...zhPillars[i], title: v.zh };
-                enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), title: v.en };
-                patchMissionPillars(zhPillars, enPillars);
-              }}
-            />
-          </Field>
-          <Field label="描述">
-            <BilingualInput
-              multiline
-              value={{ zh: pillar.desc, en: en.mission.pillars[i]?.desc ?? '' }}
-              onChange={(v) => {
-                const zhPillars = [...zh.mission.pillars];
-                const enPillars = [...en.mission.pillars];
-                zhPillars[i] = { ...zhPillars[i], desc: v.zh };
-                enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), desc: v.en };
-                patchMissionPillars(zhPillars, enPillars);
-              }}
-            />
-          </Field>
-          <RemoveBtn onClick={() => {
-            patchMissionPillars(
-              zh.mission.pillars.filter((_, idx) => idx !== i),
-              en.mission.pillars.filter((_, idx) => idx !== i),
-            );
-          }} />
-        </div>
-      ))}
-      <button
-        type="button"
-        className="adm-btn adm-btn--ghost"
-        onClick={() => {
-          const item = newMissionPillar();
-          patchMissionPillars(
-            [...zh.mission.pillars, item.zh],
-            [...en.mission.pillars, item.en],
-          );
-        }}
-      >
-        + 新增支柱
-      </button>
-
-      <h2>创作流程 · 步骤</h2>
-      {zh.process.steps.map((step, i) => (
-        <div key={i} className="adm-card adm-card--compact">
-          <Field label={`步骤 ${i + 1}`}>
-            <BilingualInput
-              multiline
-              value={{ zh: step, en: en.process.steps[i] ?? '' }}
-              onChange={(v) => {
-                const zhSteps = [...zh.process.steps];
-                const enSteps = [...en.process.steps];
-                zhSteps[i] = v.zh;
-                enSteps[i] = v.en;
-                patchProcessSteps(zhSteps, enSteps);
-              }}
-            />
-          </Field>
-          <RemoveBtn onClick={() => {
-            patchProcessSteps(
-              zh.process.steps.filter((_, idx) => idx !== i),
-              en.process.steps.filter((_, idx) => idx !== i),
-            );
-          }} />
-        </div>
-      ))}
-      <button
-        type="button"
-        className="adm-btn adm-btn--ghost"
-        onClick={() => {
-          const item = newProcessStep();
-          patchProcessSteps(
-            [...zh.process.steps, item.zh],
-            [...en.process.steps, item.en],
-          );
-        }}
-      >
-        + 新增步骤
-      </button>
-    </div>
-  );
-}
-
 function AlbumsPanel({ content, setContent }) {
   const items = content.albums ?? [];
   const workCounts = Object.fromEntries(
     items.map((a) => [a.id, content.worksManifest.filter((w) => w.album === a.id).length]),
   );
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
-    setContent({ ...content, albums: next });
-  };
+  const update = (index, patch) => patchListItem(setContent, 'albums', index, patch);
 
-  const add = () => {
-    setContent({ ...content, albums: [...items, newAlbum()] });
-  };
+  const add = () => patchContent(setContent, { albums: [...items, newAlbum()] });
 
   const remove = (index) => {
     const album = items[index];
@@ -302,7 +123,7 @@ function AlbumsPanel({ content, setContent }) {
       ? `该分类下有 ${count} 件作品。删除后这些作品仍会保留，但可能无法在前台正确显示。确定删除？`
       : '确定删除此作品集分类？';
     if (!window.confirm(msg)) return;
-    setContent({ ...content, albums: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { albums: items.filter((_, i) => i !== index) });
   };
 
   return (
@@ -362,22 +183,16 @@ function WorksPanel({ content, setContent }) {
   const items = content.worksManifest;
   const albums = content.albums ?? [];
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
-    setContent({ ...content, worksManifest: next });
-  };
+  const update = (index, patch) => patchListItem(setContent, 'worksManifest', index, patch);
 
   const add = () => {
     const defaultAlbum = albums[0]?.id ?? 'fag';
-    setContent({
-      ...content,
-      worksManifest: [...items, newWork(defaultAlbum)],
-    });
+    patchContent(setContent, { worksManifest: [...items, newWork(defaultAlbum)] });
   };
 
   const remove = (index) => {
     if (!window.confirm('确定删除这件作品？')) return;
-    setContent({ ...content, worksManifest: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { worksManifest: items.filter((_, i) => i !== index) });
   };
 
   return (
@@ -409,18 +224,13 @@ function WorksPanel({ content, setContent }) {
 function StreetPanel({ content, setContent }) {
   const items = content.streetCases;
 
-  const update = (index, patch) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patch } : item));
-    setContent({ ...content, streetCases: next });
-  };
+  const update = (index, patch) => patchListItem(setContent, 'streetCases', index, patch);
 
-  const add = () => {
-    setContent({ ...content, streetCases: [...items, newStreetCase()] });
-  };
+  const add = () => patchContent(setContent, { streetCases: [...items, newStreetCase()] });
 
   const remove = (index) => {
     if (!window.confirm('确定删除此案例？')) return;
-    setContent({ ...content, streetCases: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { streetCases: items.filter((_, i) => i !== index) });
   };
 
   return (
@@ -448,18 +258,13 @@ function StreetPanel({ content, setContent }) {
 function PricingPanel({ content, setContent }) {
   const items = content.pricing;
 
-  const update = (index, patchObj) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
-    setContent({ ...content, pricing: next });
-  };
+  const update = (index, patchObj) => patchListItem(setContent, 'pricing', index, patchObj);
 
-  const add = () => {
-    setContent({ ...content, pricing: [...items, newPricingItem()] });
-  };
+  const add = () => patchContent(setContent, { pricing: [...items, newPricingItem()] });
 
   const remove = (index) => {
     if (!window.confirm('确定删除此报价项？')) return;
-    setContent({ ...content, pricing: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { pricing: items.filter((_, i) => i !== index) });
   };
 
   const updateImage = (index, imgIndex, url) => {
@@ -511,18 +316,13 @@ function PricingPanel({ content, setContent }) {
 function SocialPanel({ content, setContent }) {
   const items = content.socialLinks;
 
-  const update = (index, patchObj) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
-    setContent({ ...content, socialLinks: next });
-  };
+  const update = (index, patchObj) => patchListItem(setContent, 'socialLinks', index, patchObj);
 
-  const add = () => {
-    setContent({ ...content, socialLinks: [...items, newSocialLink()] });
-  };
+  const add = () => patchContent(setContent, { socialLinks: [...items, newSocialLink()] });
 
   const remove = (index) => {
     if (!window.confirm('确定删除此社媒链接？')) return;
-    setContent({ ...content, socialLinks: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { socialLinks: items.filter((_, i) => i !== index) });
   };
 
   return (
@@ -552,13 +352,16 @@ function ContactCardPanel({ content, setContent }) {
   const card = content.contactCard ?? { image: '', hint: { zh: '', en: '' } };
 
   const patch = (updates) => {
-    setContent({
-      ...content,
-      contactCard: {
-        ...card,
-        ...updates,
-        hint: updates.hint ? { ...card.hint, ...updates.hint } : card.hint,
-      },
+    setContent((prev) => {
+      const prevCard = prev.contactCard ?? { image: '', hint: { zh: '', en: '' } };
+      return {
+        ...prev,
+        contactCard: {
+          ...prevCard,
+          ...updates,
+          hint: updates.hint ? { ...prevCard.hint, ...updates.hint } : prevCard.hint,
+        },
+      };
     });
   };
 
@@ -588,18 +391,13 @@ function ContactCardPanel({ content, setContent }) {
 function EventsPanel({ content, setContent }) {
   const items = content.exhibitions;
 
-  const update = (index, patchObj) => {
-    const next = items.map((item, i) => (i === index ? { ...item, ...patchObj } : item));
-    setContent({ ...content, exhibitions: next });
-  };
+  const update = (index, patchObj) => patchListItem(setContent, 'exhibitions', index, patchObj);
 
-  const add = () => {
-    setContent({ ...content, exhibitions: [...items, newExhibition()] });
-  };
+  const add = () => patchContent(setContent, { exhibitions: [...items, newExhibition()] });
 
   const remove = (index) => {
     if (!window.confirm('确定删除此活动？')) return;
-    setContent({ ...content, exhibitions: items.filter((_, i) => i !== index) });
+    patchContent(setContent, { exhibitions: items.filter((_, i) => i !== index) });
   };
 
   return (
@@ -636,14 +434,10 @@ export default function AdminApp() {
     setLoading(true);
     try {
       const data = await api.fetchContent();
-      const defaults = cloneDefaultContent();
-      setContent({
-        ...data,
-        albums: data.albums ?? defaults.albums,
-        contactCard: data.contactCard ?? defaults.contactCard,
-      });
+      setContent(normalizeAdminContent(data));
+      setMsg('');
     } catch {
-      setContent(cloneDefaultContent());
+      setContent(normalizeAdminContent(null));
       setMsg('后端未连接，使用本地默认数据（保存需启动 server）');
     } finally {
       setLoading(false);
@@ -665,7 +459,6 @@ export default function AdminApp() {
               const { token } = await api.login(password);
               setAdminToken(token);
               setAuthed(true);
-              load();
             } catch (err) {
               const msg = err.message === 'Failed to fetch' || err.name === 'TypeError'
                 ? '无法连接后端。请先在项目目录运行：npm run dev'
