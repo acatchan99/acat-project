@@ -108,13 +108,56 @@ function ImageUpload({ value, folder, onChange }) {
 
 function TextPanel({ content, setContent }) {
   const patch = (lang, section, patchObj) => {
-    setContent({
-      ...content,
+    setContent((prev) => ({
+      ...prev,
       translations: {
-        ...content.translations,
-        [lang]: { ...content.translations[lang], [section]: { ...content.translations[lang][section], ...patchObj } },
+        ...prev.translations,
+        [lang]: {
+          ...prev.translations[lang],
+          [section]: { ...prev.translations[lang][section], ...patchObj },
+        },
       },
-    });
+    }));
+  };
+
+  /** 同一字段中英双语一次更新，避免连续 patch 互相覆盖 */
+  const patchBilingual = (section, key, value) => {
+    setContent((prev) => ({
+      ...prev,
+      translations: {
+        ...prev.translations,
+        zh: {
+          ...prev.translations.zh,
+          [section]: { ...prev.translations.zh[section], [key]: value.zh },
+        },
+        en: {
+          ...prev.translations.en,
+          [section]: { ...prev.translations.en[section], [key]: value.en },
+        },
+      },
+    }));
+  };
+
+  const patchMissionPillars = (zhPillars, enPillars) => {
+    setContent((prev) => ({
+      ...prev,
+      translations: {
+        ...prev.translations,
+        zh: { ...prev.translations.zh, mission: { ...prev.translations.zh.mission, pillars: zhPillars } },
+        en: { ...prev.translations.en, mission: { ...prev.translations.en.mission, pillars: enPillars } },
+      },
+    }));
+  };
+
+  const patchProcessSteps = (zhSteps, enSteps) => {
+    setContent((prev) => ({
+      ...prev,
+      translations: {
+        ...prev.translations,
+        zh: { ...prev.translations.zh, process: { ...prev.translations.zh.process, steps: zhSteps } },
+        en: { ...prev.translations.en, process: { ...prev.translations.en.process, steps: enSteps } },
+      },
+    }));
   };
 
   const zh = content.translations.zh;
@@ -125,26 +168,26 @@ function TextPanel({ content, setContent }) {
       <h2>首页 Hero</h2>
       <Field label="标题行 1（中/英）">
         <div className="adm-bilingual">
-          <input className="adm-input" value={zh.hero.headline[0]} onChange={(e) => patch('zh', 'hero', { headline: [e.target.value, zh.hero.headline[1]] })} />
-          <input className="adm-input" value={en.hero.headline[0]} onChange={(e) => patch('en', 'hero', { headline: [e.target.value, en.hero.headline[1]] })} />
+          <input className="adm-input" value={zh.hero.headline?.[0] ?? ''} onChange={(e) => patch('zh', 'hero', { headline: [e.target.value, zh.hero.headline?.[1] ?? ''] })} />
+          <input className="adm-input" value={en.hero.headline?.[0] ?? ''} onChange={(e) => patch('en', 'hero', { headline: [e.target.value, en.hero.headline?.[1] ?? ''] })} />
         </div>
       </Field>
       <Field label="标题行 2（中/英）">
         <div className="adm-bilingual">
-          <input className="adm-input" value={zh.hero.headline[1]} onChange={(e) => patch('zh', 'hero', { headline: [zh.hero.headline[0], e.target.value] })} />
-          <input className="adm-input" value={en.hero.headline[1]} onChange={(e) => patch('en', 'hero', { headline: [en.hero.headline[0], e.target.value] })} />
+          <input className="adm-input" value={zh.hero.headline?.[1] ?? ''} onChange={(e) => patch('zh', 'hero', { headline: [zh.hero.headline?.[0] ?? '', e.target.value] })} />
+          <input className="adm-input" value={en.hero.headline?.[1] ?? ''} onChange={(e) => patch('en', 'hero', { headline: [en.hero.headline?.[0] ?? '', e.target.value] })} />
         </div>
       </Field>
-      <Field label="副标题"><BilingualInput value={{ zh: zh.hero.subline, en: en.hero.subline }} onChange={(v) => { patch('zh', 'hero', { subline: v.zh }); patch('en', 'hero', { subline: v.en }); }} /></Field>
-      <Field label="描述"><BilingualInput multiline value={{ zh: zh.hero.desc, en: en.hero.desc }} onChange={(v) => { patch('zh', 'hero', { desc: v.zh }); patch('en', 'hero', { desc: v.en }); }} /></Field>
+      <Field label="副标题"><BilingualInput value={{ zh: zh.hero.subline, en: en.hero.subline }} onChange={(v) => patchBilingual('hero', 'subline', v)} /></Field>
+      <Field label="描述"><BilingualInput multiline value={{ zh: zh.hero.desc, en: en.hero.desc }} onChange={(v) => patchBilingual('hero', 'desc', v)} /></Field>
 
       <h2>关于 / 艺术家</h2>
-      <Field label="艺术家简介"><BilingualInput multiline value={{ zh: zh.artist.lead, en: en.artist.lead }} onChange={(v) => { patch('zh', 'artist', { lead: v.zh }); patch('en', 'artist', { lead: v.en }); }} /></Field>
-      <Field label="艺术家详情"><BilingualInput multiline value={{ zh: zh.artist.body, en: en.artist.body }} onChange={(v) => { patch('zh', 'artist', { body: v.zh }); patch('en', 'artist', { body: v.en }); }} /></Field>
+      <Field label="艺术家简介"><BilingualInput multiline value={{ zh: zh.artist.lead, en: en.artist.lead }} onChange={(v) => patchBilingual('artist', 'lead', v)} /></Field>
+      <Field label="艺术家详情"><BilingualInput multiline value={{ zh: zh.artist.body, en: en.artist.body }} onChange={(v) => patchBilingual('artist', 'body', v)} /></Field>
 
       <h2>联系</h2>
-      <Field label="名称"><BilingualInput value={{ zh: zh.contact.name, en: en.contact.name }} onChange={(v) => { patch('zh', 'contact', { name: v.zh }); patch('en', 'contact', { name: v.en }); }} /></Field>
-      <Field label="说明"><BilingualInput multiline value={{ zh: zh.contact.desc, en: en.contact.desc }} onChange={(v) => { patch('zh', 'contact', { desc: v.zh }); patch('en', 'contact', { desc: v.en }); }} /></Field>
+      <Field label="名称"><BilingualInput value={{ zh: zh.contact.name, en: en.contact.name }} onChange={(v) => patchBilingual('contact', 'name', v)} /></Field>
+      <Field label="说明"><BilingualInput multiline value={{ zh: zh.contact.desc, en: en.contact.desc }} onChange={(v) => patchBilingual('contact', 'desc', v)} /></Field>
 
       <h2>关于 · 三大支柱</h2>
       {zh.mission.pillars.map((pillar, i) => (
@@ -157,8 +200,7 @@ function TextPanel({ content, setContent }) {
                 const enPillars = [...en.mission.pillars];
                 zhPillars[i] = { ...zhPillars[i], title: v.zh };
                 enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), title: v.en };
-                patch('zh', 'mission', { pillars: zhPillars });
-                patch('en', 'mission', { pillars: enPillars });
+                patchMissionPillars(zhPillars, enPillars);
               }}
             />
           </Field>
@@ -171,14 +213,15 @@ function TextPanel({ content, setContent }) {
                 const enPillars = [...en.mission.pillars];
                 zhPillars[i] = { ...zhPillars[i], desc: v.zh };
                 enPillars[i] = { ...(enPillars[i] ?? { title: '', desc: '' }), desc: v.en };
-                patch('zh', 'mission', { pillars: zhPillars });
-                patch('en', 'mission', { pillars: enPillars });
+                patchMissionPillars(zhPillars, enPillars);
               }}
             />
           </Field>
           <RemoveBtn onClick={() => {
-            patch('zh', 'mission', { pillars: zh.mission.pillars.filter((_, idx) => idx !== i) });
-            patch('en', 'mission', { pillars: en.mission.pillars.filter((_, idx) => idx !== i) });
+            patchMissionPillars(
+              zh.mission.pillars.filter((_, idx) => idx !== i),
+              en.mission.pillars.filter((_, idx) => idx !== i),
+            );
           }} />
         </div>
       ))}
@@ -187,8 +230,10 @@ function TextPanel({ content, setContent }) {
         className="adm-btn adm-btn--ghost"
         onClick={() => {
           const item = newMissionPillar();
-          patch('zh', 'mission', { pillars: [...zh.mission.pillars, item.zh] });
-          patch('en', 'mission', { pillars: [...en.mission.pillars, item.en] });
+          patchMissionPillars(
+            [...zh.mission.pillars, item.zh],
+            [...en.mission.pillars, item.en],
+          );
         }}
       >
         + 新增支柱
@@ -206,14 +251,15 @@ function TextPanel({ content, setContent }) {
                 const enSteps = [...en.process.steps];
                 zhSteps[i] = v.zh;
                 enSteps[i] = v.en;
-                patch('zh', 'process', { steps: zhSteps });
-                patch('en', 'process', { steps: enSteps });
+                patchProcessSteps(zhSteps, enSteps);
               }}
             />
           </Field>
           <RemoveBtn onClick={() => {
-            patch('zh', 'process', { steps: zh.process.steps.filter((_, idx) => idx !== i) });
-            patch('en', 'process', { steps: en.process.steps.filter((_, idx) => idx !== i) });
+            patchProcessSteps(
+              zh.process.steps.filter((_, idx) => idx !== i),
+              en.process.steps.filter((_, idx) => idx !== i),
+            );
           }} />
         </div>
       ))}
@@ -222,8 +268,10 @@ function TextPanel({ content, setContent }) {
         className="adm-btn adm-btn--ghost"
         onClick={() => {
           const item = newProcessStep();
-          patch('zh', 'process', { steps: [...zh.process.steps, item.zh] });
-          patch('en', 'process', { steps: [...en.process.steps, item.en] });
+          patchProcessSteps(
+            [...zh.process.steps, item.zh],
+            [...en.process.steps, item.en],
+          );
         }}
       >
         + 新增步骤
