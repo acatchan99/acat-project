@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "dsznajder.es7-react-js-snippets",
+    "antfu.vite",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "usernamehw.errorlens",
+    "lokalise.i18n-ally",
+    "rangav.vscode-thunder-client",
+    "wix.vscode-import-cost",
+    "gruntfuggly.todo-tree",
+    "redhat.vscode-yaml",
+    "pkief.material-icon-theme"
+  ]
+}

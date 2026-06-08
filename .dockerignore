@@ -1,0 +1,11 @@
+node_modules
+server/node_modules
+.git
+.vercel
+dist
+*.md
+public/albums
+public/street-cases
+public/pricing
+public/contact
+public/uploads

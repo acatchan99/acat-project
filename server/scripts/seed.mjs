@@ -34,5 +34,9 @@ const content = {
 if (!existsSync(path.dirname(outPath))) {
   mkdirSync(path.dirname(outPath), { recursive: true });
 }
+if (existsSync(outPath)) {
+  console.log('site-content.json already exists, skip seed');
+  process.exit(0);
+}
 writeFileSync(outPath, `${JSON.stringify(content, null, 2)}\n`, 'utf8');
 console.log('Seeded site-content.json');

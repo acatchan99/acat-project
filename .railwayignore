@@ -1,0 +1,12 @@
+node_modules
+server/node_modules
+.git
+.vercel
+dist
+*.md
+scripts/deploy-railway.ps1
+public/albums
+public/street-cases
+public/pricing
+public/contact
+public/uploads

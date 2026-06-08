@@ -11,8 +11,8 @@
     "build:web": "npm run optimize-images && vite build",
     "optimize-images": "node scripts/optimize-images.mjs",
     "postinstall": "npm install --prefix server",
-    "start": "npm run seed --prefix server && cross-env NODE_ENV=production npm run start --prefix server",
-    "start:api": "npm run seed --prefix server && cross-env NODE_ENV=production API_ONLY=true npm run start --prefix server",
+    "start": "cross-env NODE_ENV=production npm run start --prefix server",
+    "start:api": "cross-env NODE_ENV=production API_ONLY=true npm run start --prefix server",
     "seed": "npm run seed --prefix server",
     "preview": "vite preview --host"
   },
