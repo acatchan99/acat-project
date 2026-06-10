@@ -13,7 +13,7 @@ export const DEFAULT_HERO_VIDEO = {
   heroBackgroundVideoMobileWebm: '',
   heroBackgroundVideoDesktopMp4: '/hero/desktop/1781090589638-hero-desktop.mp4',
   heroBackgroundVideoDesktopWebm: '',
-  heroBackgroundVideoPoster: '',
+  heroBackgroundVideoPoster: '/hero/mobile/hero-mobile-poster.jpg',
   heroBackgroundVideoEnabled: true,
   heroBackgroundVideoOverlayOpacity: 0.35,
   heroBottomGradientEnabled: true,

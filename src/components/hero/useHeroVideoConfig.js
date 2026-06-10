@@ -4,6 +4,7 @@ import {
   normalizeHeroVideoConfig,
   resolveHeroVideoSources,
 } from '../../data/heroBackgroundVideo';
+import { resolveHeroPosterUrl } from '../../lib/heroVideoCompat';
 
 function resolveMediaUrl(url) {
   const trimmed = url?.trim() ?? '';
@@ -22,7 +23,7 @@ export function useHeroVideoConfig(platform) {
   const videoSrc = enabled ? resolveMediaUrl(sources.primary) : '';
   const videoMp4 = enabled ? resolveMediaUrl(sources.mp4) : '';
   const videoWebm = enabled ? resolveMediaUrl(sources.webm) : '';
-  const poster = resolveMediaUrl(config.heroBackgroundVideoPoster);
+  const poster = resolveMediaUrl(resolveHeroPosterUrl(config, isMobile));
 
   return {
     config,
