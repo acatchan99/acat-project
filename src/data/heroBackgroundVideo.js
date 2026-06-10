@@ -7,14 +7,14 @@ export { resolveHeroVideoSources, isMp4VideoUrl, isWebmVideoUrl } from './heroVi
 
 /** @type {HeroBackgroundVideoConfig} */
 export const DEFAULT_HERO_VIDEO = {
-  heroBackgroundVideoMobile: '',
-  heroBackgroundVideoDesktop: '',
-  heroBackgroundVideoMobileMp4: '',
+  heroBackgroundVideoMobile: '/hero/mobile/1781090580662-hero-mobile.mp4',
+  heroBackgroundVideoDesktop: '/hero/desktop/1781090589638-hero-desktop.mp4',
+  heroBackgroundVideoMobileMp4: '/hero/mobile/1781090580662-hero-mobile.mp4',
   heroBackgroundVideoMobileWebm: '',
-  heroBackgroundVideoDesktopMp4: '',
+  heroBackgroundVideoDesktopMp4: '/hero/desktop/1781090589638-hero-desktop.mp4',
   heroBackgroundVideoDesktopWebm: '',
   heroBackgroundVideoPoster: '',
-  heroBackgroundVideoEnabled: false,
+  heroBackgroundVideoEnabled: true,
   heroBackgroundVideoOverlayOpacity: 0.35,
   heroBottomGradientEnabled: true,
   heroBottomGradientHeight: '20%',

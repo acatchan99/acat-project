@@ -15,6 +15,7 @@ import { existsSync, mkdirSync } from 'fs';
 import { authMiddleware, signToken } from './lib/auth.js';
 
 import { loadContent, saveContent, ensureDataDir, DATA_FILE } from './lib/contentStore.js';
+import { DEFAULT_HERO_VIDEO, mergeHeroVideoFields } from '../src/data/heroBackgroundVideo.js';
 
 import { spawnSync } from 'child_process';
 
@@ -178,7 +179,10 @@ app.get('/api/content', (_req, res) => {
 
   }
 
-  res.json(content);
+  res.json({
+    ...content,
+    ...mergeHeroVideoFields(DEFAULT_HERO_VIDEO, content),
+  });
 
 });
 
