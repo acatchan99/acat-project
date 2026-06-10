@@ -1,3 +1,4 @@
+export { default as MobileHeroCardSection } from './MobileHeroCardSection';
 export { default as MobileHeroSection } from './MobileHeroSection';
 export { default as MobileHeroBackgroundVideo } from './MobileHeroBackgroundVideo';
 export { default as HeroPosterFallback } from './HeroPosterFallback';

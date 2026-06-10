@@ -13,12 +13,38 @@ export function resolveHeroPosterUrl(config, isMobile) {
 }
 
 /**
- * @returns {'video' | 'wechat'}
+ * 手机 Chrome → MP4 叠化 Hero；微信 / Safari / 原生浏览器 → 卡片 Hero。
+ * @returns {'video' | 'card'}
  */
+export function getMobileHeroLayout() {
+  if (typeof navigator === 'undefined') return 'card';
+
+  const ua = navigator.userAgent;
+
+  if (/MicroMessenger/i.test(ua)) return 'card';
+  if (/QQ\//i.test(ua) && /MQQBrowser/i.test(ua)) return 'card';
+  if (/HuaweiBrowser|HiSilicon/i.test(ua)) return 'card';
+  if (/UCBrowser/i.test(ua)) return 'card';
+  if (/MiuiBrowser|XiaoMi/i.test(ua)) return 'card';
+  if (/Quark/i.test(ua)) return 'card';
+
+  const isChrome = /Chrome|CriOS/i.test(ua);
+  const isEdge = /EdgA|EdgiOS/i.test(ua);
+  const isOpera = /OPR/i.test(ua);
+  const isSamsung = /SamsungBrowser/i.test(ua);
+
+  if (isChrome && !isEdge && !isOpera) return 'video';
+
+  if (/Android/i.test(ua) && !isChrome && !isSamsung) return 'card';
+  if (/iPhone|iPad|iPod/i.test(ua) && !/CriOS/i.test(ua)) return 'card';
+  if (isSamsung || isEdge || isOpera) return 'card';
+
+  return 'card';
+}
+
+/** @returns {'video' | 'wechat'} */
 export function getHeroBackgroundMode() {
-  if (typeof navigator === 'undefined') return 'video';
-  if (/MicroMessenger/i.test(navigator.userAgent)) return 'wechat';
-  return 'video';
+  return getMobileHeroLayout() === 'video' ? 'video' : 'wechat';
 }
 
 export function isWechatBrowser() {
@@ -66,7 +92,6 @@ function tryPlay(video) {
 }
 
 /**
- * 微信 H5 经典解锁：WeixinJSBridgeReady + getNetworkType 后再 play。
  * @param {HTMLVideoElement} video
  */
 function scheduleWechatBridgePlay(video) {
@@ -86,7 +111,6 @@ function scheduleWechatBridgePlay(video) {
 }
 
 /**
- * 尽量在移动端/微信播起来；失败由调用方 fallback 到 poster。
  * @param {HTMLVideoElement | null} video
  * @param {{ mode?: 'video' | 'wechat', timeoutMs?: number }} options
  * @returns {() => void} cleanup
