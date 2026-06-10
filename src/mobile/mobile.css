@@ -203,8 +203,8 @@
   opacity: 1;
 }
 
-.m-hero-bg-video--static .m-hero-bg-video__media {
-  display: none !important;
+.m-hero-bg-video--wechat .m-hero-bg-video__media {
+  -webkit-touch-callout: none;
 }
 
 .m-hero-poster-fallback--empty {
