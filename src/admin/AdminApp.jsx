@@ -10,9 +10,11 @@ import {
 } from './templates';
 import { normalizeAdminContent, patchContent, patchListItem } from './contentState';
 import TextPanel from './TextPanel';
+import HeroVideoPanel from './HeroVideoPanel';
 
 const TABS = [
   { id: 'text', label: '文案' },
+  { id: 'heroVideo', label: '首页视频' },
   { id: 'albums', label: '作品集分类' },
   { id: 'works', label: '作品条目' },
   { id: 'street', label: '街头案例' },
@@ -510,6 +512,7 @@ export default function AdminApp() {
 
   const panels = {
     text: <TextPanel content={content} setContent={setContent} />,
+    heroVideo: <HeroVideoPanel content={content} setContent={setContent} />,
     albums: <AlbumsPanel content={content} setContent={setContent} />,
     works: <WorksPanel content={content} setContent={setContent} />,
     street: <StreetPanel content={content} setContent={setContent} />,

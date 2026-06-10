@@ -1,7 +1,7 @@
 import { useLang } from '../context/LangContext';
 import { useNavigate } from '../hooks/useNavigate';
 import GraffitiCanvas from './GraffitiCanvas';
-import OptimizedImage from './OptimizedImage';
+import HeroBackgroundVideo from './hero/HeroBackgroundVideo';
 
 export default function Hero() {
   const { t } = useLang();
@@ -10,6 +10,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="hero">
+      <HeroBackgroundVideo platform="desktop" />
       <div className="hero-graffiti-bg">
         <GraffitiCanvas variant="hero" />
         <div className="hero-graffiti-shade" />
@@ -22,16 +23,6 @@ export default function Hero() {
       </div>
 
       <div className="hero-visual">
-        <div className="hero-figure halftone">
-          <OptimizedImage
-            src="/about-artist.jpg"
-            alt="ACAT 陈吖猫"
-            variant="display"
-            loading="eager"
-            fetchPriority="high"
-            className="hero-figure-img"
-          />
-        </div>
         <div className="hero-deco hero-deco--arc" aria-hidden="true" />
         <div className="hero-deco hero-deco--star" aria-hidden="true">✦</div>
         <div className="hero-deco hero-deco--bubble" aria-hidden="true">FAG</div>

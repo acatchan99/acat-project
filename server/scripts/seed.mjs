@@ -7,6 +7,7 @@ import { getPricingItems } from '../../src/data/pricing.js';
 import { DEFAULT_CONTACT_CARD } from '../../src/data/contactCard.js';
 import { DEFAULT_ALBUMS } from '../../src/data/albums.js';
 import { DEFAULT_EXHIBITIONS } from '../../src/data/exhibitions.js';
+import { DEFAULT_HERO_VIDEO } from '../../src/data/heroBackgroundVideo.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifestPath = path.join(__dirname, '../../src/data/works-manifest.json');
@@ -29,6 +30,7 @@ const content = {
   exhibitions,
   albums: DEFAULT_ALBUMS,
   contactCard: DEFAULT_CONTACT_CARD,
+  ...DEFAULT_HERO_VIDEO,
 };
 
 if (!existsSync(path.dirname(outPath))) {

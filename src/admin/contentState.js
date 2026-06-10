@@ -1,4 +1,5 @@
 import { cloneDefaultContent } from '../data/defaultContent';
+import { mergeHeroVideoFields } from '../data/heroBackgroundVideo';
 
 /** 载入 CMS 时与默认文案深合并，避免缺字段导致表单异常 */
 export function normalizeAdminContent(raw) {
@@ -21,6 +22,7 @@ export function normalizeAdminContent(raw) {
   return {
     ...defaults,
     ...raw,
+    ...mergeHeroVideoFields(defaults, raw),
     translations: {
       zh: mergeLang(defaults.translations.zh, raw.translations?.zh),
       en: mergeLang(defaults.translations.en, raw.translations?.en),

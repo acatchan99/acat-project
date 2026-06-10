@@ -1,13 +1,17 @@
 import { cloneDefaultContent } from '../data/defaultContent';
+import { mergeHeroVideoFields } from '../data/heroBackgroundVideo';
 
 /** 合并远端 CMS，防止静态部署把 HTML 当 JSON 后丢失 translations */
 export function mergeRemoteContent(remote) {
   const defaults = cloneDefaultContent();
   if (!remote || typeof remote !== 'object') return defaults;
 
+  const heroVideo = mergeHeroVideoFields(defaults, remote);
+
   return {
     ...defaults,
     ...remote,
+    ...heroVideo,
     translations: remote.translations?.zh && remote.translations?.en
       ? remote.translations
       : defaults.translations,

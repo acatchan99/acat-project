@@ -4,6 +4,7 @@ import { applyPricing } from './pricing';
 import { applySocialLinks } from './social';
 import { applyContactCard } from './contactCard';
 import { applyAlbums } from './albums';
+import { applyHeroBackgroundVideo } from './heroBackgroundVideo';
 
 export function applySiteContent(content) {
   if (!content) return;
@@ -14,4 +15,5 @@ export function applySiteContent(content) {
   if (content.socialLinks) applySocialLinks(content.socialLinks);
   if (content.exhibitions) applyExhibitions(content.exhibitions);
   if (content.contactCard) applyContactCard(content.contactCard);
+  applyHeroBackgroundVideo(content);
 }

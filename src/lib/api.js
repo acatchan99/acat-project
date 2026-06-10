@@ -67,4 +67,19 @@ export const api = {
     form.append('folder', folder);
     return request('/api/upload', { method: 'POST', auth: true, body: form });
   },
+  uploadHeroVideoMobile: (file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('/api/upload/hero-video/mobile', { method: 'POST', auth: true, body: form });
+  },
+  uploadHeroVideoDesktop: (file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('/api/upload/hero-video/desktop', { method: 'POST', auth: true, body: form });
+  },
+  uploadHeroVideoPoster: (file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return request('/api/upload/hero-video/poster', { method: 'POST', auth: true, body: form });
+  },
 };

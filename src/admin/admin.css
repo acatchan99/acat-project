@@ -324,3 +324,24 @@
     grid-template-columns: 1fr;
   }
 }
+
+.adm-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.adm-check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--blue, #008dff);
+}
+
+.adm-thumb--video {
+  width: min(100%, 280px);
+  height: auto;
+  max-height: 120px;
+  background: #000;
+}
